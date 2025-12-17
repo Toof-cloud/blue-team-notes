@@ -86,6 +86,10 @@ Example:
 chmod u+x file.sh == add execute to owner
 chmod g-w file.sh == remove write from any group
 cdmod o=r file.sh == set read only for others
+Example 2:
+chmod u=rw,g=r,o=r public.txt
+chmod u=rw,go= secret.txt
+chmod u=rwx,go=rx script.sh
 
 Symbols: u -> owner/user, g -> group, o = others, a = all
 
