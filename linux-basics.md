@@ -23,7 +23,7 @@ output = goes to the Desktop dir
 pwd = Finding out the full Path to our Current Working Directory 
 e.g | pwd
 output = tyronegabrielr.pascual@Tyrones-MacBook-Air Desktop % pwd
-       = /Users/tyronegabrielr.pascual/Desktop
+       = /Users/tyronegabrielr.pascual/Desktoprfr
 
 cat = concatenate, seeing contents of a file
 e.g | cat sample.txt
@@ -110,3 +110,5 @@ Number	       Meaning
 755	       Scripts & binaries
 644	       Text files
 600	       Sensitive files (SSH keys)
+
+Permission is importang in security as it orginazies who can read, write, and execute command to a file, having the right permissions to correct individuals organizes and is best for safety practices.
