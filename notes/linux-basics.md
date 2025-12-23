@@ -112,3 +112,35 @@ Number	       Meaning
 600	       Sensitive files (SSH keys)
 
 Permission is importang in security as it orginazies who can read, write, and execute command to a file, having the right permissions to correct individuals organizes and is best for safety practices.
+
+
+## Linux Logs (macOS Practice)
+
+Linux systems store logs in `/var/log`.  
+macOS uses a similar structure, making it useful for local practice.
+
+### Authentication Logs
+- Linux: `/var/log/auth.log`
+- macOS: `/var/log/secure.log`
+- Purpose:
+  - Tracks login attempts
+  - Records sudo usage
+  - Useful for detecting unauthorized access
+
+### System Logs
+- Linux: `/var/log/syslog`
+- macOS: `/var/log/system.log`
+- Purpose:
+  - System events
+  - Service activity
+  - Error messages
+
+### Common SOC Commands
+- `less` – safely view logs
+- `grep` – search patterns
+         - Global Regular Expression Print
+         - Only prints the files that exist ad contain the pattern you ask for
+         - If nothing matches it prints nothing
+
+- `tail` – view recent entries
+- `tail -f` – live monitoring
