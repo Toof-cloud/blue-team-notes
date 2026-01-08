@@ -38,3 +38,7 @@ Servers are the second most common device within an Active Directory domain. Ser
 3. Domain Controllers
 
 Domain Controllers are the third most common device within an Active Directory domain. Domain Controllers allow you to manage the Active Directory Domain. These devices are often deemed the most sensitive devices within the network as they contain hashed passwords for all user accounts within the environment.
+
+Kerberos authentication - is the default authentication protocol for any recent version of Windows. Users who log into a service using Kerberos will be assigned tickets. Think of tickets as proof of a previous authentication. Users with tickets can present them to a service to demonstrate they have already authenticated into the network before and are therefore enabled to use it.
+
+NetNTLM - Legacy authentication protocol kept for compatibility purposes.
