@@ -41,4 +41,15 @@ Domain Controllers are the third most common device within an Active Directory d
 
 Kerberos authentication - is the default authentication protocol for any recent version of Windows. Users who log into a service using Kerberos will be assigned tickets. Think of tickets as proof of a previous authentication. Users with tickets can present them to a service to demonstrate they have already authenticated into the network before and are therefore enabled to use it.
 
+KDC - Key Distribution Center - installed on the DC in charge of creating Kerberos tickets to the network
+
+TGT - Ticket Granting Ticket 
+- sent by the KDC that allows the user to request additional tikets for specific services - and along with the TGT from the KDC is a session key, they need it to generate the following requests 
+- TGT is encrypted by the KDC 
+
+TGS - Ticket Granting Service
+- are tickets that allow connection only to specific service they were created for
+- username and timestamp is required to request a TGS and is encrypted by the session key, along with the TGT and SPN (Service Principal Name) that indicates the service and server name that is intented to access.
+- TGS is encrypted using the service owner hash
+
 NetNTLM - Legacy authentication protocol kept for compatibility purposes.
