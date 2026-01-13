@@ -59,3 +59,11 @@ GPO distribution
 GPOs are distributed to the network via a network share called SYSVOL, which is stored in the DC. All users in a domain should typically have access to this share over the network to sync their GPOs periodically. The SYSVOL share points by default to the C:\Windows\SYSVOL\sysvol\ directory on each of the DCs in our network.
 
 Once a change has been made to any GPOs, it might take up to 2 hours for computers to catch up. If you want to force any particular computer to sync its GPOs immediately, you can always run the following command on the desired computer:
+
+Trees - if the company grows and their network expands into different countries you will do organize them by parting it into subdomains.
+
+Enterprise Admins group - has the privillege to control in the whole domain while Domain Admins only control their subdomains.
+
+Forests - The union of several trees with different namespaces into the same network.
+
+Trust Relationships - if the other a tree in a forest wants to access a another tree in another forest's files they need 
