@@ -84,3 +84,6 @@ Trust Relationships
 ---
 # Windows Command Line
 
+Windows Powershell 
+- PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.”
+- PowerShell was developed to overcome the limitations of existing command-line tools and scripting environments in Windows.
