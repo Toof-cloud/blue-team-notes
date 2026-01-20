@@ -86,4 +86,50 @@ Trust Relationships
 
 Windows Powershell 
 - PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.”
-- PowerShell was developed to overcome the limitations of existing command-line tools and scripting environments in Windows.
+- PowerShell was developed to overcome the limitations of existing command-line tools and scripting environments in Windows.w
+
+Common commands
+- Get-ChildItem = lists the files and directories in a location specified with the -Path parameter
+- Set-Location -Path = changes the current directory
+- New-Item - Path = removes both directory and files
+- Copy-Item = copy the file
+- Move-Item = move the file to other dir or path
+- Get-Content = similar to type/cat
+
+### Piping
+- is a technique used in command-line environments that allows the output of one command to be used as the input for another. This creates a sequence of operations where the data flows from one command to the next. Represented by the | symbol, piping is widely used in the Windows CLI, as introduced earlier in this module, as well as in Unix-based shells.
+###
+    - Get-ChildItem | Where-Object -Property "Extension"
+    -eq ".txt"
+
+- "Where-Object" filters the files by their Extension property, ensuring that only files with extension equal (-eq) to .txt are listed.
+
+- -eq (i.e. "equal to") is part of a set of comparison operators that are shared with other scripting languages (e.g. Bash, Python).
+
+- ne: "not equal". This operator can be used to exclude objects from the results based on specified criteria.
+- gt: "greater than". This operator will filter only objects which exceed a specified value. It is important to note that this is a strict comparison, meaning that objects that are equal to the specified value will be excluded from the results.
+- ge: "greater than or equal to". This is the non-strict version of the previous operator. A combination of -gt and - eq.
+- lt: "less than". Like its counterpart, "greater than", this is a strict operator. It will include only objects which are strictly below a certain value.
+- le: "less than or equal to". Just like its counterpart -ge, this is the non-strict version of the previous operator. A combination of -lt and -eq.
+
+# Properties in Powershell
+- Name:
+The file or folder name only, without the full path. This is useful when you need to display, compare, or filter items by their names.
+
+- Length:
+The size of a file measured in bytes. This property applies to files (not folders) and is commonly used to filter files based on size, such as finding large files.
+
+- CreationTime:
+The date and time when the file or folder was originally created. This helps determine how old an item is.
+
+- LastAccessTime:
+The date and time when the file or folder was last opened or accessed. This is useful for identifying unused or rarely accessed files.
+
+- LastWriteTime:
+The date and time when the file or folder was last modified. This is often used to track recent changes.
+
+- FullName:
+The complete path of the file or folder, including the drive and directories. This is important when you need the exact location of an item.
+
+- Extension: 
+The file extension (such as .txt, .jpg, or .exe) that indicates the file type and is useful for filtering files by format.
