@@ -95,6 +95,10 @@ Common commands
 - Copy-Item = copy the file
 - Move-Item = move the file to other dir or path
 - Get-Content = similar to type/cat
+- Get-Process = provides a detailed view of all currently running processes, including CPU and memory usage.
+- Get-Service allows the retrieval of information about the status of services on the machine, such as which services are running, stopped, or paused.
+- Get-NetTCPConnection displays current TCP connections.
+- Get-FileHash as a useful cmdlet for generating file hashes.
 
 ### Piping
 - is a technique used in command-line environments that allows the output of one command to be used as the input for another. This creates a sequence of operations where the data flows from one command to the next. Represented by the | symbol, piping is widely used in the Windows CLI, as introduced earlier in this module, as well as in Unix-based shells.
