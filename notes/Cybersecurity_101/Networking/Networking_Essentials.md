@@ -8,3 +8,12 @@
     - DHCP Offer: The server responds with a DHCPOFFER message with an IP address available for the client to accept.
     - DHCP Request: The client responds with a DHCPREQUEST message to indicate that it has accepted the offered IP.
     - DHCP Acknowledge: The server responds with a DHCPACK message to confirm that the offered IP address is now assigned to this client.
+
+### ARP (Address Resolution Protocol)
+- Two common data link layers we use are Ethernet (IEEE 802.3) and WiFi (IEEE 802.11).
+
+### ICMP Internet Control Message Protocol
+- Internet Control Message Protocol (ICMP) is mainly used for network diagnostics and error reporting. Two popular commands rely on ICMP, and they are instrumental in network troubleshooting and network security. The commands are:
+
+    - ping: This command uses ICMP to test connectivity to a target system and measures the round-trip time (RTT). In other words, it can be used to learn that the target is alive and that its reply can reach our system.
+    - traceroute: This command is called traceroute on Linux and UNIX-like systems and tracert on MS Windows systems. It uses ICMP to discover the route from your host to the target.
