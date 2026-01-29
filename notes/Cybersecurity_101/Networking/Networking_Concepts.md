@@ -36,3 +36,13 @@
 
 ## Telnet
 - The TELNET (Teletype Network) protocol is a network protocol for remote terminal connection. In simpler words, telnet, a TELNET client, allows you to connect to and communicate with a remote system and issue text commands. Although initially it was used for remote administration, we can use telnet to connect to any server listening on a TCP port number.
+- ## Common Ports for Telnet Interaction
+
+| Port | Service | Use Case / Description |
+| :--- | :--- | :--- |
+| **23** | **Telnet** | The default port for unencrypted remote login (rarely used now due to security). |
+| **80** | **HTTP** | Used to manually request webpages (e.g., fetching `flag.html`). |
+| **21** | **FTP** | Used to check if an FTP server is responding before logging in. |
+| **25** | **SMTP** | Used to manually test email sending or verify mail server headers. |
+| **110** | **POP3** | Used to check if an email inbox is reachable. |
+| **443** | **HTTPS** | **Note:** Telnet usually fails here because it cannot handle the SSL/TLS encryption handshake. |
