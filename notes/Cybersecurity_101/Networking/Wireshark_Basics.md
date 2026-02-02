@@ -253,9 +253,3 @@ It contains the actual data being transmitted by the application.
 
 ---
 
-## Summary
-Wireshark’s packet dissection allows analysts to:
-- View packets layer by layer
-- Correlate protocol fields with raw bytes
-- Identify communication behavior and errors  
-- Perform detailed network troubleshooting and forensic analysis
