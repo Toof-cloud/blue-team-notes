@@ -401,3 +401,121 @@ Displays:
 - Group
 - Total occurrences
 
+# Packet Filtering (Wireshark)
+
+## Overview
+- Wireshark uses a powerful **filter engine** to reduce noise and focus on events of interest.
+- Two types of filters:
+  - **Capture Filters** – limit what packets are captured.
+  - **Display Filters** – limit what packets are *shown*.
+- This section focuses on **Display Filters** (most commonly used during analysis).
+
+> Golden Rule: **“If you can click on it, you can filter and copy it.”**
+
+---
+
+## Ways to Filter Traffic
+1. **Query-based filtering** (display filter bar)
+2. **GUI-based filtering** (right-click menus)
+
+Both methods achieve the same result.
+
+---
+
+## Apply as Filter
+- The fastest way to filter traffic.
+- Right-click a field → **Apply as Filter**
+- Filters packets matching the selected value.
+
+**Notes:**
+- Can be accessed via:
+  - Right-click menu
+  - `Analyse` → Apply as Filter
+- Total vs displayed packet count is shown in the **status bar**.
+
+---
+
+## Conversation Filter
+- Filters **all packets related to a conversation**.
+- Uses:
+  - IP addresses
+  - Port numbers
+- Ideal for tracking a full session instead of a single value.
+
+**Access:**
+- Right-click menu
+- `Analyse` → Conversation Filter
+
+---
+
+## Colourise Conversation
+- Highlights packets in a conversation **without filtering**.
+- Does **not reduce** the number of displayed packets.
+- Overrides existing colouring rules.
+
+**Access:**
+- Right-click menu
+- `View` → Colourise Conversation
+
+**Reset:**
+- `View` → Colourise Conversation → Reset Colourisation
+
+---
+
+## Prepare as Filter
+- Similar to **Apply as Filter**, but does **not execute immediately**.
+- Adds the filter expression to the display filter bar.
+- Allows combining filters using **AND / OR** before applying.
+
+**Use case:**
+- Building complex filters step-by-step.
+
+---
+
+## Apply as Column
+- Adds a selected field as a **new column** in the packet list pane.
+- Helps track how a specific field appears across packets.
+
+**Access:**
+- Right-click menu
+- `Analyse` → Apply as Column
+
+**Notes:**
+- Columns can be enabled/disabled by clicking the packet list header.
+
+---
+
+## Follow Stream
+- Reconstructs **application-level data** from packets.
+- Useful for viewing:
+  - Credentials
+  - Commands
+  - Transferred data
+- Works for unencrypted protocols.
+
+**Supported streams:**
+- TCP
+- UDP
+- HTTP
+
+**Access:**
+- Right-click menu
+- `Analyse` → Follow TCP/UDP/HTTP Stream
+
+**Stream view colors:**
+- **Red** → Client
+- **Blue** → Server
+
+**Important:**
+- Wireshark automatically applies a display filter for the stream.
+- Remove it using the **X button** in the display filter bar to return to full view.
+
+---
+
+## Simple Display Filter Queries
+- Use the **Display Filter Bar** for quick filtering.
+- Filters can be chained and customized for precise results.
+
+---
+
+
