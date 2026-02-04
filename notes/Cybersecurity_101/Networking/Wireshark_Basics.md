@@ -519,3 +519,5 @@ Both methods achieve the same result.
 ---
 
 
+## Conclusion
+Wireshark basics focus on understanding packets through efficient navigation, filtering, and stream analysis to reduce noise and highlight events of interest. By using display filters, packet marking, conversations, and expert info, analysts can quickly identify suspicious behavior and protocol anomalies. Mastering these fundamentals builds a strong foundation for deeper traffic analysis, incident response, and network forensics.
