@@ -252,4 +252,152 @@ This layer is an extension of the Application Protocol layer and may show:
 It contains the actual data being transmitted by the application.
 
 ---
+# Packet Navigation (Wireshark)
+
+## Packet Numbers
+- Wireshark assigns a **unique packet number** to every captured packet.
+- Helps navigate **large captures** and return to a **specific event** quickly.
+- Packet numbers are sequential based on capture order.
+
+**Use case:**
+- Referencing packets during analysis
+- Jumping back to a known suspicious packet
+
+---
+
+## Go to Packet
+- Allows direct navigation to a specific packet number.
+- Supports:
+  - Jumping **up/down** between packets
+  - **In-frame packet tracking**
+  - Finding the **next packet in a conversation**
+
+**Access methods:**
+- `Go` menu
+- Toolbar
+- Keyboard shortcut
+
+---
+
+## Find Packets
+- Enables searching packets by **content**, not just number.
+- Useful for identifying:
+  - Intrusion patterns
+  - Errors
+  - Specific protocol activity
+
+### Input Types
+- **Display Filter**
+- **Hex**
+- **String** (most common)
+- **Regex** (most powerful)
+
+> Searches are **case-insensitive by default**, but case sensitivity can be enabled.
+
+### Search Locations
+- **Packet List pane**
+- **Packet Details pane**
+- **Packet Bytes pane**
+
+⚠️ Searching in the wrong pane will return no results even if the data exists.
+
+---
+
+## Mark Packets
+- Marks packets for **quick identification** and later review.
+- Useful for:
+  - Highlighting suspicious activity
+  - Exporting specific packets
+
+**How to mark:**
+- `Edit` menu
+- Right-click → Mark/Unmark Packet
+
+**Behavior:**
+- Marked packets appear **black**
+- Marks are **session-based** (lost when the file is closed)
+
+---
+
+## Packet Comments
+- Allows adding **notes directly to packets**
+- Useful for:
+  - Documentation
+  - Collaboration with other analysts
+  - Remembering suspicious indicators
+
+**Key difference from marking:**
+- Comments **persist** in the capture file until removed
+
+---
+
+## Export Packets
+- Used to extract **specific packets** from large capture files.
+- Helps narrow the investigation scope.
+- Ideal for sharing only **relevant evidence**.
+
+**Access:**
+- `File` → Export Specified Packets
+
+---
+
+## Export Objects (Files)
+- Extracts files transferred over the network.
+- Critical for malware and incident response analysis.
+
+**Supported protocols:**
+- DICOM
+- HTTP
+- IMF
+- SMB
+- TFTP
+
+> Only available when the protocol supports object transfer.
+
+---
+
+## Time Display Format
+- Default format: **Seconds Since Beginning of Capture**
+- Often changed to **UTC** for clearer timelines.
+
+**Change via:**
+- `View` → Time Display Format
+
+**Why important:**
+- Improves event correlation
+- Easier timeline reconstruction
+
+---
+
+## Expert Info
+- Automatically flags **protocol anomalies** and issues.
+- Should be treated as **guidance**, not absolute truth.
+- False positives and negatives are possible.
+
+### Severity Levels
+| Severity | Color  | Description |
+|--------|--------|------------|
+| Chat   | Blue   | Normal workflow information |
+| Note   | Cyan   | Notable events (e.g., app errors) |
+| Warn   | Yellow | Unusual behavior or warnings |
+| Error  | Red    | Malformed or problematic packets |
+
+### Common Expert Info Groups
+| Group      | Description |
+|-----------|-------------|
+| Checksum  | Checksum errors |
+| Deprecated | Deprecated protocol usage |
+| Comment   | Packet comment detection |
+| Malformed | Malformed packet detection |
+
+**Access Expert Info:**
+- Status bar (lower-left)
+- `Analyse` → Expert Information
+
+Displays:
+- Packet number
+- Summary
+- Protocol
+- Group
+- Total occurrences
 
