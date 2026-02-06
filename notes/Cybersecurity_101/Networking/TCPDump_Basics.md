@@ -1,4 +1,4 @@
-# TCP Dump
+# TCPDump: The Basics
 
 ## Tcpdump and libpcap Overview
 
@@ -6,7 +6,7 @@ The **Tcpdump** tool and its **libpcap** library are written in **C** and **C++*
 
 The **libpcap** library serves as the **foundation** for many modern **networking and packet analysis tools**. It was later ported to **Microsoft Windows** as **WinPcap**, extending its usability beyond Unix-based environments.
 
-# Tcpdump Fundamentals
+# Tcpdump: Basic Packet Capture
 
 Running `tcpdump` without arguments is useful for testing installation, but real-world scenarios require specific arguments to define listening interfaces, output files, and display formats.
 
@@ -73,3 +73,64 @@ To see more detail (TTL, identification, length, etc.), use the verbose flags:
 
 * **Fast Monitor All Interfaces:** `tcpdump -i any -nn`  
     *Monitors all traffic globally without waiting for DNS/Port lookups.*
+
+---
+
+# Tcpdump: Filtering Expressions
+
+## 1. Filtering by Host
+You can limit captured packets to those exchanged with a specific network printer, game server, or website using the `host` keyword. Capturing packets usually requires `root` or `sudo` privileges.
+
+* **Specific Host:** `sudo tcpdump host example.com` (Captures traffic both to and from the host).
+* **Source Only:** `tcpdump src host 10.10.1.1` (Only packets where the specified IP is the sender).
+* **Destination Only:** `tcpdump dst host 10.10.1.1` (Only packets where the specified IP is the receiver).
+
+---
+
+## 2. Filtering by Port
+To capture traffic for a specific service, such as DNS or HTTP, use the `port` keyword.
+
+* **DNS Traffic:** `sudo tcpdump port 53 -n`.
+* **HTTPS Traffic:** `tcpdump tcp port 443`.
+* **Combined Filters:** Use `and` to be more specific, e.g., `tcpdump host example.com and tcp port 443`.
+
+---
+
+## 3. Analyzing Output and Flags
+When reading output, the `>` symbol shows the direction of traffic from Source to Destination.
+
+| Flag | Meaning | Description |
+| :--- | :--- | :--- |
+| **`[S]`** | **SYN** | Connection request (Start of TCP handshake) |
+| **`[.]`** | **ACK** | Acknowledgment (Data received successfully) |
+| **`[P]`** | **PUSH** | Data is being sent to the application immediately |
+| **`[F]`** | **FIN** | Finished (Normal connection shutdown) |
+| **`[R]`** | **RST** | Reset (Immediate connection kill/rejection) |
+
+---
+
+## 4. Reading from Files (`-r`) and Piping
+You do not need `root` or `sudo` privileges to read an existing `.pcap` file.
+
+* **Read Command:** `tcpdump -r traffic.pcap`.
+* **Limit Results:** `tcpdump -r traffic.pcap -c 5` (Shows only the first 5 packets).
+* **Counting Packets:** Use the Linux `wc` (word count) tool to count lines.
+  * `tcpdump -r traffic.pcap src host 192.168.124.1 | wc -l`.
+  * **Note:** Ensure you use a lowercase **L** (`-l`) for lines, not the number **1**.
+
+---
+
+## 5. Solving Lab Tasks (ARP & DNS)
+
+### Task: Finding the ARP Requestor
+* **Question:** What is the IP address of the host that asked for the MAC address of 192.168.124.137?
+* **Command:** `tcpdump -r traffic.pcap arp -n`
+* **Logic:** Look for the phrase `Request who-has [Target] tell [Source]`. The IP after **"tell"** is the host that asked the question.
+
+### Task: Identifying the First DNS Query
+* **Question:** What hostname (subdomain) appears in the first DNS query?
+* **Command:** `tcpdump -r traffic.pcap port 53 -c 1 -n`
+* **Logic:**
+  * **`port 53`**: Filters for DNS traffic.
+  * **`-c 1`**: Stops after the very first packet.
+  * **Result:** Look for the `A?` (IPv4) or `AAAA?` (IPv6) query. The string immediately following it is the hostname requested.
