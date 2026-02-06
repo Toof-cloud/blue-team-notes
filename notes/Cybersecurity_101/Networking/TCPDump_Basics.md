@@ -134,3 +134,114 @@ You do not need `root` or `sudo` privileges to read an existing `.pcap` file.
   * **`port 53`**: Filters for DNS traffic.
   * **`-c 1`**: Stops after the very first packet.
   * **Result:** Look for the `A?` (IPv4) or `AAAA?` (IPv6) query. The string immediately following it is the hostname requested.
+
+  It looks like the previous formatting might have obscured the actual code blocks you need to copy into your `.md` file. I have regenerated the content below using standard Markdown code blocks so the terminal commands are clearly visible and copy-paste ready.
+
+---
+
+# Tcpdump Study Guide: Advanced Filtering & Lab Solutions
+
+## 1. Filtering by Packet Length (Size)
+
+Filtering by size is indispensable for identifying data exfiltration or small control signals within millions of packets.
+
+* **Greater than:** `tcpdump greater 15000`
+* Filters packets with a length greater than or equal to the specified bytes.
+
+
+* **Less than:** `tcpdump less 64`
+* Filters packets with a length less than or equal to the specified bytes.
+
+
+
+---
+
+## 2. Advanced Bitwise Filtering
+
+You can target specific bits within headers to find exact packet types.
+
+* **Multicast Filter:** `ether[0] & 1 != 0`
+* Takes the first byte in the Ethernet header and checks if the result is not 0 to show multicast addresses.
+
+
+* **IP Options Filter:** `ip[0] & 0xf != 5`
+* Takes the first byte in the IP header to catch all IP packets with extra options.
+
+
+
+---
+
+## 3. TCP Flag Filtering
+
+Use `tcp[tcpflags]` to refer to the TCP flags field and filter by the state of a connection.
+
+| Filter Type | Command Example | Result |
+| --- | --- | --- |
+| **Only SYN** | `tcpdump "tcp[tcpflags] == tcp-syn"` | Captures packets with **only** the SYN flag set. |
+| **At Least SYN** | `tcpdump "tcp[tcpflags] & tcp-syn != 0"` | Captures packets with **at least** the SYN flag set. |
+| **SYN or ACK** | `tcpdump "tcp[tcpflags] & (tcp-syn | tcp-ack) != 0"` |
+
+---
+
+##  Lab Challenge Solutions
+
+### Task: The ARP Requestor
+
+**Question:** What is the IP address of the host that asked for the MAC address of 192.168.124.137?
+
+* **Command:** ```bash
+tcpdump -r traffic.pcap arp
+
+### Task: The ARP Requestor
+* **Question:** What is the IP address of the host that asked for the MAC address of 192.168.124.137?
+* **Command:**
+    ```bash
+    tcpdump -r traffic.pcap arp -n
+    ```
+* **Logic:**  
+  Look for the phrase:
+    ```
+    Request who-has 192.168.124.137 tell [IP_ADDRESS]
+    ```
+* **The Answer:**  
+  The IP address listed after the word **"tell"** is the host that is asking.
+
+### Task: The First DNS Query
+* **Question:** What hostname (subdomain) appears in the first DNS query?
+* **Command:**
+    ```bash
+    tcpdump -r traffic.pcap port 53 -c 1 -n
+    ```
+* **Logic:**  
+  - `port 53` → filters DNS traffic  
+  - `-c 1` → captures only the first packet  
+  - `-n` → disables name resolution  
+  Look for the hostname immediately following `A?` (IPv4) or `AAAA?` (IPv6).
+
+* **The Answer:**  
+  The string after `A?` or `AAAA?` is the requested hostname.
+
+
+* **Logic:** * **`port 53`**: Isolates DNS traffic.
+* **`-c 1`**: Captures only the very first packet.
+
+
+* **The Answer:** Look for the hostname following the `A?` or `AAAA?` query symbol.
+
+### Task: Specific Flag Counts
+
+### Task: TCP Reset (RST) Packets
+* **Question:** How many packets have **only** the TCP Reset (RST) flag set?
+* **Command:**
+    ```bash
+    tcpdump -r traffic.pcap "tcp[tcpflags] == tcp-rst" | wc -l
+    ```
+* **Note:**  
+  Using `==` ensures that **only** the RST flag is set and all other flags are unset.
+
+### Task: Port Identification
+* **Analysis:**  
+  In the string `185.117.80.53.80`, the final number after the dot is the port.
+* **IP Address:** `185.117.80.53`
+* **Port:** `80` (Standard port for HTTP)
+
