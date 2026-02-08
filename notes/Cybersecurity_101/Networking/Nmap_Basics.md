@@ -28,3 +28,37 @@ While basic tools exist, they often fall short in complex environments:
 
 
 ---
+## Task 1: Introduction to Network Scanning (Continued)
+
+### Remote Discovery vs. Local Discovery
+When scanning a "remote" network (where a router sits between you and the target), Nmap's behavior changes because **ARP requests cannot cross routers.**
+
+#### Remote Scanning Tactics
+To find live hosts across a router, Nmap (as root) sends multiple types of packets to get a response:
+* **ICMP Echo Requests:** Standard pings.
+* **ICMP Timestamp Requests:** An alternative ping method.
+* **TCP SYN (Port 443):** Checking for HTTPS.
+* **TCP ACK (Port 80):** Checking for HTTP via a "fake" acknowledgement.
+
+
+
+#### Analyzing Results
+* **Live Host:** Responds to any of the above probes (e.g., an ICMP Echo Reply).
+* **Dead Host:** No response. You may see "ICMP Destination Unreachable" messages sent back by the intermediate router.
+
+---
+
+### Special Scan Types
+Beyond the standard `-sn` ping scan, Nmap offers specific options for targeting and noise control:
+
+| Flag | Name | Purpose |
+| :--- | :--- | :--- |
+| `-sL` | **List Scan** | Lists every IP in the target range without sending a single packet to the targets. Used to verify your scope. |
+| `-PS` | **TCP SYN Discovery** | Specifically uses SYN packets to discover hosts. |
+| `-PA` | **TCP ACK Discovery** | Specifically uses ACK packets to discover hosts. |
+| `-sn` | **No Port Scan** | Lightest "live host" check; does not scan for services/ports. |
+
+> [!TIP]
+> Use `-sL` (List Scan) before a big scan to ensure you haven't made a typo in your IP range (e.g., accidentally targeting the whole internet instead of your local lab).
+
+---
