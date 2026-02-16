@@ -62,3 +62,46 @@ Beyond the standard `-sn` ping scan, Nmap offers specific options for targeting 
 > Use `-sL` (List Scan) before a big scan to ensure you haven't made a typo in your IP range (e.g., accidentally targeting the whole internet instead of your local lab).
 
 ---
+
+## Task: Port Scanning & Service Detection
+
+### TCP Scan Types
+Once you know a host is alive, you need to find its open ports. There are two primary ways to scan TCP:
+
+| Flag | Name | Description | Requirements |
+| :--- | :--- | :--- | :--- |
+| `-sS` | **SYN Scan** | "Stealth" scan. Sends SYN, waits for SYN/ACK, then sends RST. Never completes the connection. | **Root/Sudo** |
+| `-sT` | **Connect Scan** | Completes the full 3-way handshake. Slower and more "noisy" in logs. | User privileges |
+
+
+
+### Specifying Ports
+Nmap scans the top 1000 ports by default. Use these flags to be specific:
+* `-p 80,443`: Scan specific ports.
+* `-p 1-1024`: Scan a range of ports.
+* `-p-`: Scan all 65,535 ports (use with caution, it takes time!).
+* `-F`: Fast scan (Top 100 ports).
+
+---
+
+### Service Version Detection (`-sV`)
+Knowing a port is "open" isn't enough. The `-sV` flag forces Nmap to communicate with the port to determine exactly what software and version is running.
+
+**Example Command:**
+`sudo nmap -sV -p 8008 <target_ip>`
+
+#### Why it matters:
+* **Identification:** Tells you if port 8008 is running Apache, Nginx, or a custom web server.
+* **Vulnerability Research:** Once you have a version number (e.g., `Apache 2.4.41`), you can search for specific exploits for that version.
+
+
+
+---
+
+### Summary of Flags Used
+To find the hidden web server and its version in this room, we combined the techniques:
+1. **Find Port:** `nmap -p- <target_ip>` (Found port 8008).
+2. **Find Version:** `nmap -sV -p 8008 <target_ip>` (Identified the web server software).
+
+---
+*End of Nmap Basics Notes*
