@@ -57,3 +57,59 @@ Symmetric encryption uses the **same key** for both encryption and decryption.
 | **AES** | Symmetric Block | 128-256 bit | Extremely High |
 
 ---
+
+## Task 2: Common Use of Asymmetric Encryption
+
+Asymmetric encryption is computationally expensive (slow). In the real world, we don't use it to encrypt large files; instead, we use it as a **secure handshake** to exchange keys for faster symmetric encryption.
+
+### The Locked Box Analogy
+How do two people agree on a secret key without a "snooper" seeing it?
+
+| Analogy Component | Cryptographic Equivalent |
+| :--- | :--- |
+| **The Secret Code** | Symmetric Cipher & Key (e.g., AES) |
+| **The Padlock** | Public Key (Given to everyone) |
+| **The Padlock's Key** | Private Key (Kept secret by the owner) |
+
+**The Workflow:**
+1. You ask a server for its **Public Key** (the lock).
+2. You put your chosen symmetric key in a box and lock it with that Public Key.
+3. Only the server, holding the **Private Key**, can open that box to get the symmetric key.
+4. Now, both parties have the same secret key and can switch to fast **Symmetric Encryption**.
+
+
+
+---
+
+## Task 3: RSA (Rivest-Shamir-Adleman)
+
+RSA is the most famous public-key algorithm. Its security relies on the **Factoring Problem**.
+
+### The Core Logic
+* It is mathematically easy to multiply two massive prime numbers (e.g., $p \times q = n$).
+* It is "computationally infeasible" (nearly impossible for current computers) to do the reverse: taking a massive number $n$ and figuring out which two primes ($p$ and $q$) were multiplied to create it.
+
+### RSA Variables for CTFs
+When solving cryptography challenges, you will often see these variables:
+
+| Variable | Definition |
+| :--- | :--- |
+| **p, q** | Two large prime numbers. |
+| **n** | The product ($p \times q$). Part of both keys. |
+| **e** | The Public Exponent. Used for encryption. |
+| **d** | The Private Exponent. Used for decryption. |
+| **m (or x)** | The **Plaintext** (message). |
+| **c (or y)** | The **Ciphertext** (encrypted message). |
+
+
+
+### The Math in Action
+To encrypt a message ($m$):
+$$c = m^e \pmod{n}$$
+
+To decrypt a ciphertext ($c$):
+$$m = c^d \pmod{n}$$
+
+> [!TIP]
+> **Tools for RSA CTFs:**
+> If you are given $n$, $e$, and $c$ and asked to find the flag, tools like **RsaCtfTool** or **rsatool** can automate the process of factoring $n$ (if it is small enough) to calculate the private key $d$.
