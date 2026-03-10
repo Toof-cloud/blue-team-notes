@@ -173,3 +173,62 @@ Understanding URLs is vital for cybersecurity:
 | **SSH** | 22 | Secure Remote Access |
 
 ---
+# Web Application Basics — Task 4
+
+## HTTP Messages
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Dialogue of the Web
+
+Communication between your browser (the client) and a web server happens through **HTTP Messages**. These are structured data packets that ensure both sides understand the intent of the communication.
+
+### 🧱 The 4-Part Message Structure
+
+Whether it is a request or a response, every HTTP message follows the same general layout:
+
+1. **Start Line:** * **In a Request:** Contains the method (GET/POST), the path, and the HTTP version.
+* **In a Response:** Contains the HTTP version and the Status Code (e.g., 200 OK).
+
+
+2. **Headers:** Key-value pairs that act as metadata. They describe things like the type of browser being used, the type of data being sent, or security requirements.
+3. **Empty Line:** A mandatory blank line that tells the computer: "The headers are finished; the actual content (body) starts next."
+4. **Body (Optional):** The actual payload.
+* In a **Request**, this might be the password you typed into a login form.
+* In a **Response**, this is usually the HTML code for the webpage you want to see.
+
+
+
+---
+
+## 🧠 Why the "Empty Line" is Critical
+
+From a technical and security perspective, the empty line is a strict delimiter. If a message is malformed and lacks this line, the server may fail to process the request, or worse, it could lead to **HTTP Request Smuggling** vulnerabilities, where an attacker "hides" a second request inside the body of the first.
+
+---
+
+## 📝 Task 4 Answers
+
+* **Which HTTP message is returned by the web server after processing a client's request?**
+* `HTTP Response`
+
+
+* **What follows the headers in an HTTP message?**
+* `Empty Line`
+
+
+
+---
+
+## 🛠️ HTTP Message Anatomy Quick-Look
+
+| Part | Purpose | Example |
+| --- | --- | --- |
+| **Start Line** | Defines the action/status | `GET /index.html HTTP/1.1` |
+| **Headers** | Metadata & Instructions | `Host: tryhackme.com` |
+| **Empty Line** | The separator | *(Blank Space)* |
+| **Body** | The actual content | `<html>...</html>` |
+
+---
