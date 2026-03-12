@@ -590,3 +590,88 @@ When you click a link, your browser usually tells the new site where you came fr
 | **Referrer-Policy** | `no-referrer` or `same-origin` | Information Leakage |
 
 ---
+## Web Application Basics: Master Cheat Sheet
+
+**TryHackMe Study Guide**
+
+---
+
+### 🌐 Web Architecture (The Planet Analogy)
+
+* **Front End (The Surface):**
+* **HTML:** The structure/skeleton.
+* **CSS:** The styling/skin.
+* **JavaScript:** The interactivity/logic.
+
+
+* **Back End (The Engine):**
+* **Web Server:** Delivers content (e.g., Apache, Nginx).
+* **Database:** Stores info (e.g., MySQL).
+* **WAF:** The protective atmosphere filtering malicious traffic.
+
+
+
+---
+
+### 📍 URL Anatomy
+
+**Example:** `https://admin@tryhackme.com:443/rooms/basics?id=1#task3`
+
+| Component | Example | Description |
+| --- | --- | --- |
+| **Scheme** | `https://` | Protocol (HTTP/HTTPS). |
+| **User** | `admin@` | Optional (and risky) auth info. |
+| **Host/Domain** | `tryhackme.com` | The destination server. |
+| **Port** | `:443` | The "doorway" (80 for HTTP, 443 for HTTPS). |
+| **Path** | `/rooms/basics` | File/resource location. |
+| **Query String** | `?id=1` | Data passed to server (starts with `?`). |
+| **Fragment** | `#task3` | Internal page anchor (starts with `#`). |
+
+---
+
+### ✉️ HTTP Message Structure
+
+1. **Start Line:** Method/Path/Version (Request) OR Version/Status (Response).
+2. **Headers:** Metadata key-value pairs.
+3. **Empty Line:** **Required** separator between headers and body.
+4. **Body:** The actual data (HTML, JSON, Form Data).
+
+---
+
+### 🛠️ HTTP Request Methods (Verbs)
+
+| Method | Use Case | Security Note |
+| --- | --- | --- |
+| **GET** | Retrieve data | Parameters visible in URL (plaintext). |
+| **POST** | Submit/Create data | Data in body; needs input sanitization. |
+| **PUT** | Replace resource | Requires strict authorization. |
+| **DELETE** | Remove resource | High risk; verify permissions. |
+| **OPTIONS** | Check supported methods | Used for CORS pre-flight checks. |
+| **HEAD** | Get headers only | Check file size/existence without download. |
+
+---
+
+### 🚦 HTTP Response Status Codes
+
+| Range | Category | Common Examples |
+| --- | --- | --- |
+| **1xx** | Informational | `100 Continue` |
+| **2xx** | Success | `200 OK` |
+| **3xx** | Redirection | `301 Permanent`, `302 Temporary` |
+| **4xx** | Client Error | `400 Bad Request`, `401 Unauthorized`, `404 Not Found` |
+| **5xx** | Server Error | `500 Internal Error`, `503 Service Unavailable` |
+
+---
+
+### 🛡️ Security & Response Headers
+
+| Header | Recommendation | Protection Provided |
+| --- | --- | --- |
+| **Server** | Remove or Obscure | Prevents version-specific exploit research. |
+| **Set-Cookie** | `HttpOnly; Secure` | Prevents XSS theft and MitM sniffing. |
+| **CSP** | `script-src 'self'` | Blocks malicious script execution (XSS). |
+| **HSTS** | `max-age=...` | Forces encrypted HTTPS connections. |
+| **X-Content-Type** | `nosniff` | Blocks browsers from "guessing" file types. |
+| **Referrer-Policy** | `same-origin` | Prevents leaking sensitive URLs to other sites. |
+
+---
