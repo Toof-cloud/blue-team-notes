@@ -447,3 +447,73 @@ The first digit of the status code defines the "class" of the response. Memorizi
 | **500** | Internal Server Error | Potential code-level vulnerability or crash. |
 
 ---
+# Web Application Basics — Task 8
+
+## HTTP Response: Headers and Body
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Response Headers
+
+While Request Headers tell the server about the client, **Response Headers** tell the browser about the server and how to handle the data it just received. For a security professional, these headers are a goldmine of information.
+
+### 🧱 Essential Response Headers
+
+| Header | Purpose | Security Context |
+| --- | --- | --- |
+| **Server** | Identifies the software (Nginx, Apache). | **Risk:** Reveals version numbers (e.g., `Server: Apache/2.4.1`) which helps attackers find specific exploits. |
+| **Set-Cookie** | Instructs the browser to store a piece of data. | **Crucial:** Used for session management. Must be protected by security flags. |
+| **Content-Type** | Tells the browser how to render the body. | Prevents "MIME-sniffing" attacks where a browser might mistakenly run a text file as a script. |
+| **Location** | Used in 3xx redirects to provide the new URL. | **Risk:** Can lead to "Open Redirect" vulnerabilities if not validated. |
+
+---
+
+## 🍪 Securing the Cookie
+
+The `Set-Cookie` header is the primary target for attackers looking to hijack sessions. To defend against this, developers use specific "flags" within the header:
+
+1. **HttpOnly:** This flag prevents JavaScript (and therefore **XSS** attacks) from reading the cookie. If an attacker injects a script, they cannot steal the session token if this flag is present.
+2. **Secure:** This ensures the cookie is **only** sent over encrypted HTTPS connections. It prevents the cookie from being sniffed out of the air on public Wi-Fi.
+
+---
+
+## ⚙️ The Response Body
+
+This is the "payload" the server delivers to the user.
+
+* **Web Pages:** Usually HTML code.
+* **APIs:** Usually JSON or XML data.
+* **Files:** Binary data for images, PDFs, or downloads.
+
+**Security Warning:** If the body contains user-supplied data that hasn't been properly "escaped," the browser might execute that data as code, leading to **Stored Cross-Site Scripting (XSS)**.
+
+---
+
+## 📝 Task 8 Answers
+
+* **Which HTTP response header can reveal information about the web server's software and version...?**
+* `Server`
+
+
+* **Which flag should be added to cookies... to ensure they are only transmitted over HTTPS?**
+* `Secure`
+
+
+* **Which flag should be added to cookies... to prevent them from being accessed via JavaScript?**
+* `HttpOnly`
+
+
+
+---
+
+## 🛠️ Cookie Security Cheat Sheet
+
+| Flag | Function | Attack Prevented |
+| --- | --- | --- |
+| **`HttpOnly`** | Blocks JS access to `document.cookie`. | Session Hijacking via XSS |
+| **`Secure`** | Forces transmission over HTTPS only. | Man-in-the-Middle (MitM) sniffing |
+| **`SameSite=Strict`** | Prevents the cookie from being sent on cross-site requests. | Cross-Site Request Forgery (CSRF) |
+
+---
