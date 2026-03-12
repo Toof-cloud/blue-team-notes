@@ -374,3 +374,76 @@ The body contains the actual data being sent to the server (common in `POST`, `P
 | **Legacy API** | `application/xml` | SOAP services or older web integrations. |
 
 ---
+# Web Application Basics — Task 7
+
+## HTTP Response: Status Line and Status Codes
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Status Line
+
+Just as a request has a request line, an HTTP response has a **Status Line**. This is the first thing your browser reads to determine if it should display a webpage, show an error, or redirect you elsewhere.
+
+It consists of:
+
+1. **HTTP Version:** (e.g., `HTTP/1.1`)
+2. **Status Code:** A 3-digit integer representing the result.
+3. **Reason Phrase:** A human-readable summary (e.g., `OK`, `Not Found`).
+
+---
+
+## 🧱 Status Code Categories
+
+The first digit of the status code defines the "class" of the response. Memorizing these ranges is essential for quick troubleshooting and security analysis.
+
+| Range | Category | Meaning |
+| --- | --- | --- |
+| **100 - 199** | **Informational** | Request received, continuing process. |
+| **200 - 299** | **Success** | The action was successfully received, understood, and accepted. |
+| **300 - 399** | **Redirection** | Further action needs to be taken to complete the request (e.g., the page moved). |
+| **400 - 499** | **Client Error** | The request contains bad syntax or cannot be fulfilled (e.g., you asked for a page that doesn't exist). |
+| **500 - 599** | **Server Error** | The server failed to fulfill an apparently valid request. |
+
+---
+
+## 🧠 Common Codes for Pentesters
+
+* **200 OK:** The "Holy Grail." The request worked.
+* **301/302 Redirect:** Often used to redirect users from `http` to `https`.
+* **401 Unauthorized / 403 Forbidden:** Key indicators that you've hit a protected area. 401 means "Who are you?" (needs login), 403 means "I know who you are, but you're not allowed here."
+* **404 Not Found:** Useful during **directory brute-forcing**; it tells you which paths *don't* exist.
+* **500 Internal Server Error:** This often happens when a web exploit (like SQLi) causes the server's backend code to crash. It’s a huge "hint" that the application is struggling with your input.
+
+---
+
+## 📝 Task 7 Answers
+
+* **What part of an HTTP response provides the HTTP version, status code, and a brief explanation...?**
+* `Status Line`
+
+
+* **Which category of HTTP response codes indicates that the web server encountered an internal issue...?**
+* `Server Error Responses (500-599)`
+
+
+* **Which HTTP status code indicates that the requested resource could not be found...?**
+* `404`
+
+
+
+---
+
+## 🛠️ Status Code Cheat Sheet
+
+| Code | Phrase | Security Context |
+| --- | --- | --- |
+| **200** | OK | Standard successful response. |
+| **301** | Moved Permanently | Target page has a new URL. |
+| **400** | Bad Request | The server didn't understand your "malformed" exploit. |
+| **401** | Unauthorized | Target requires a valid session or login. |
+| **404** | Not Found | Page missing (or hidden). |
+| **500** | Internal Server Error | Potential code-level vulnerability or crash. |
+
+---
