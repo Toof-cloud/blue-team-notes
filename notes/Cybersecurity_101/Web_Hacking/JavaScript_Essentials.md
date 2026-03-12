@@ -401,3 +401,70 @@ If a developer writes login logic or "premium feature" checks entirely in JavaSc
 | ` |  | ` |
 
 ---
+# JavaScript Essentials — Task 7
+
+## Exploring Minified & Obfuscated Files
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Minification vs. Obfuscation
+
+In a production environment, you rarely see perfectly formatted JavaScript. Developers use tools to transform the code for two main reasons: performance and secrecy.
+
+### 🧱 1. Minification
+
+Minification is about **efficiency**. It removes all "noise" that the computer doesn't need to run the code.
+
+* **Actions:** Removes spaces, newlines, and comments.
+* **Goal:** Smaller file size = faster page loads.
+* **Pentesting Tip:** Most browsers have a **"{ }" (Pretty Print)** button in the Sources tab that can instantly reverse minification by adding line breaks back in.
+
+### ⚙️ 2. Obfuscation
+
+Obfuscation is about **concealment**. It purposefully makes the code confusing for humans to prevent reverse-engineering.
+
+* **Actions:** Renames `username` to `_0x1a2b`, converts strings to hex codes, and adds "junk" logic that does nothing.
+* **Goal:** Protect intellectual property or hide malicious intent.
+* **Pentesting Tip:** Attackers use obfuscation to hide malware. As a defender, you use "Deobfuscators" or "Beautifiers" to strip away the layers and find the original logic.
+
+---
+
+## 🧠 Decoding Obfuscated Values
+
+In the task, you are given a mathematical expression disguised as obfuscated code:
+`age = 0x1 * 0x247e + 0x35 * -0x2e + -0x1ae3;`
+
+To solve this, you can simply paste the expression into your **Browser Console**. The browser will do the math for you.
+
+1. `0x1 * 0x247e` = $9342$
+2. `0x35 * -0x2e` = $53 * -46 = -2438$
+3. `-0x1ae3` = $-6883$
+4. **Total:** $9342 - 2438 - 6883 = 21$
+
+---
+
+## 📝 Task 7 Answers
+
+* **What is the alert message shown after running the file hello.html?**
+* `Welcome to THM`
+
+
+* **What is the value of the age variable in the following obfuscated code snippet?**
+* `21`
+* *(Note: You can calculate this by typing the expression directly into the Chrome Console).*
+
+
+
+---
+
+## 🛠️ Deobfuscation Toolkit
+
+| Tool Type | Purpose | Example Tool |
+| --- | --- | --- |
+| **Pretty Printer** | Fixes indentation/spacing. | Browser DevTools `{ }` |
+| **Deobfuscator** | Renames variables and simplifies logic. | deobfuscate.io |
+| **Hex Converter** | Decodes `\x41` into `A`. | CyberChef |
+
+---
