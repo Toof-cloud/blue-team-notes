@@ -267,3 +267,68 @@ This is a core JS concept called **DOM Manipulation**.
 | **Inline** | `<button onclick="alert('Hi')">` | Simple interactions (avoid for security). |
 
 ---
+# JavaScript Essentials — Task 5
+
+## Abusing Dialogue Functions
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Interactive Dialogue Functions
+
+JavaScript provides three primary functions for interacting with users via pop-up boxes. While they are useful for debugging or simple user input, they are also the most common "proof of concept" used during web penetration testing to demonstrate **Cross-Site Scripting (XSS)**.
+
+### 🧱 The Three Main Functions
+
+| Function | Purpose | Return Value | Pentesting Context |
+| --- | --- | --- | --- |
+| **`alert()`** | Displays information/warnings. | `undefined` | Used to prove a script can execute in a victim's browser. |
+| **`prompt()`** | Asks for user input. | Entered String or `null` | Can be used to trick users into typing passwords or sensitive data. |
+| **`confirm()`** | Asks for a Yes/No choice. | `true` or `false` | Can be used to trick a user into clicking "OK" for a malicious action. |
+
+---
+
+## 🧠 Security Perspective: Denial of Service (DoS)
+
+As shown in the `invoice.html` example, simple loops can turn helpful functions into an "Inconvenience Attack." By wrapping an `alert()` inside a large `for` loop, an attacker can effectively lock a user's browser tab, as most browsers will not let you interact with the page until the dialogue is closed.
+
+```javascript
+for (let i = 0; i < 500; i++) {
+    alert("This page is locked!");
+}
+
+```
+
+### 🛡️ Why This Matters for XSS
+
+When a security researcher finds a vulnerability, they often use `<script>alert(1)</script>`. This isn't meant to be malicious; it is a safe way to show that a vulnerability exists. If the `alert` pops up, it means the server didn't sanitize the input, and a real attacker could swap that `alert` for a script that steals your **session cookies**.
+
+---
+
+## 📝 Task 5 Answers
+
+* **In the file invoice.html, how many times does the code show the alert Hacked?**
+* `3`
+
+
+* **Which of the JS interactive elements should be used to display a dialogue box that asks the user for input?**
+* `prompt`
+
+
+* **If the user enters Tesla, what value is stored in the carName variable?**
+* `Tesla`
+
+
+
+---
+
+## 🛠️ Dialogue Quick-Code
+
+| Task | Code Snippet |
+| --- | --- |
+| **Simple Notification** | `alert("System Update Required");` |
+| **Data Capture** | `let user = prompt("Enter Username:");` |
+| **Action Verification** | `let deleteFile = confirm("Delete permanently?");` |
+
+---
