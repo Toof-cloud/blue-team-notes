@@ -194,3 +194,76 @@ console.log("The result is: " + result); // Output function
 | **Inspect Element** | `Ctrl + Shift + C` |
 
 ---
+# JavaScript Essentials — Task 4
+
+## Integrating JavaScript in HTML
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 How JavaScript Lives in HTML
+
+JavaScript doesn't just run in a vacuum; it needs to be "hooked" into an HTML document. There are two primary ways a developer (or an attacker) can inject logic into a page.
+
+### 🧱 1. Internal JavaScript
+
+Code is written directly inside the HTML file using `<script>` tags.
+
+* **Pros:** Easy for small tasks; all code is in one place.
+* **Cons:** Makes HTML files bulky and hard to manage as they grow.
+* **Pentesting Tip:** When you see internal scripts, look for "hardcoded" secrets like API keys or sensitive logic directly in the source code.
+
+### ⚙️ 2. External JavaScript
+
+Code is stored in a separate `.js` file and linked using the `src` attribute.
+
+* **Syntax:** `<script src="filename.js"></script>`
+* **Pros:** Organized, cached by the browser for speed, and reusable across multiple pages.
+* **Pentesting Tip:** Attackers check external files for vulnerabilities in the logic. If a site loads a script from a third-party (like a CDN), an attacker might try to compromise that third party to inject malicious code into the target site.
+
+---
+
+## 🧠 Interacting with the DOM
+
+In the example code:
+`document.getElementById("result").innerHTML = ...`
+This is a core JS concept called **DOM Manipulation**.
+
+* **`document`**: Refers to the entire HTML page.
+* **`getElementById("result")`**: Finds the specific HTML tag with `id="result"`.
+* **`.innerHTML`**: Changes the text inside that tag.
+
+---
+
+## 📝 Task 4 Answers
+
+* **Which type of JavaScript integration places the code directly within the HTML document?**
+* `Internal JavaScript`
+
+
+* **Which method is better for reusing JS across multiple web pages?**
+* `External JavaScript`
+
+
+* **What is the name of the external JS file that is being called by external_test.html?**
+* `test.js`
+* *(Note: You can find this by right-clicking `external_test.html` in the exercise folder and selecting **View Page Source**)*.
+
+
+* **What attribute links an external JS file in the <script> tag?**
+* `src`
+
+
+
+---
+
+## 🛠️ JS Integration Reference
+
+| Method | Syntax | Best Used For |
+| --- | --- | --- |
+| **Internal** | `<script> console.log("Hi"); </script>` | Page-specific logic or rapid testing. |
+| **External** | `<script src="assets/app.js"></script>` | Reusable logic and professional apps. |
+| **Inline** | `<button onclick="alert('Hi')">` | Simple interactions (avoid for security). |
+
+---
