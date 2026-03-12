@@ -310,3 +310,67 @@ The method tells the server what the user intends to do. From a security perspec
 | `OPTIONS` | Query | Pre-flight check for CORS (Cross-Origin Resource Sharing). |
 
 ---
+# Web Application Basics — Task 6
+
+## HTTP Request: Headers and Body
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Request Headers
+
+Headers provide essential metadata about a request. They help the server understand who is sending the request, where they came from, and what kind of data they are sending.
+
+### 🧱 Common Request Headers
+
+| Header | Purpose | Example |
+| --- | --- | --- |
+| **Host** | Tells the server which domain the user wants. Essential for servers hosting multiple sites on one IP. | `Host: tryhackme.com` |
+| **User-Agent** | Identifies the browser and OS. Attackers often "spoof" this to bypass mobile-only or browser-specific restrictions. | `User-Agent: Mozilla/5.0...` |
+| **Referer** | The URL of the previous page that linked to this request. | `Referer: https://google.com` |
+| **Cookie** | Sends stored session data back to the server to prove you are logged in. | `Cookie: session=12345` |
+| **Content-Type** | Tells the server how to read the data in the **Body**. | `Content-Type: application/json` |
+
+---
+
+## ⚙️ The Request Body
+
+The body contains the actual data being sent to the server (common in `POST`, `PUT`, and `PATCH` requests). The format of this data is defined by the `Content-Type` header.
+
+### 📊 Common Body Formats
+
+1. **URL Encoded (`application/x-www-form-urlencoded`):** The default for simple HTML forms. Data looks like `field1=value1&field2=value2`.
+2. **Form Data (`multipart/form-data`):** Used when uploading files. It uses a "boundary" string to separate different parts of the data (e.g., a text field and a binary image file).
+3. **JSON (`application/json`):** The standard for modern APIs. Structured as `{"key": "value"}`.
+4. **XML (`application/xml`):** An older, tag-based structure similar to HTML used in many legacy enterprise systems.
+
+---
+
+## 📝 Task 6 Answers
+
+* **Which HTTP request header specifies the domain name of the web server...?**
+* `Host`
+
+
+* **What is the default content type for form submissions... encoded as key=value pairs?**
+* `application/x-www-form-urlencoded`
+
+
+* **Which part of an HTTP request contains additional information like host, user agent, and content type...?**
+* `Headers`
+
+
+
+---
+
+## 🛠️ Content-Type Cheat Sheet
+
+| Format | Header Value | Use Case |
+| --- | --- | --- |
+| **Simple Form** | `application/x-www-form-urlencoded` | Standard login or contact forms. |
+| **File Upload** | `multipart/form-data` | Uploading profile pictures or documents. |
+| **API Call** | `application/json` | Sending data to a mobile app backend. |
+| **Legacy API** | `application/xml` | SOAP services or older web integrations. |
+
+---
