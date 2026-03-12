@@ -232,3 +232,81 @@ From a technical and security perspective, the empty line is a strict delimiter.
 | **Body** | The actual content | `<html>...</html>` |
 
 ---
+# Web Application Basics — Task 5
+
+## HTTP Request: Request Line and Methods
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Request Line
+
+The request line is the very first line of an HTTP request. It acts as the "command" sent to the server, defining what action to take and where to take it.
+
+It consists of three distinct parts:
+
+1. **Method:** The verb (action) being performed (e.g., `GET`, `POST`).
+2. **Path:** The specific location of the resource (e.g., `/login` or `/api/users`).
+3. **Version:** The protocol version being used (e.g., `HTTP/1.1`).
+
+---
+
+## 🧱 HTTP Methods (The Verbs)
+
+The method tells the server what the user intends to do. From a security perspective, understanding these is crucial because each one presents different risks.
+
+### Primary Methods
+
+| Method | Purpose | Security Note |
+| --- | --- | --- |
+| **GET** | Retrieve data. | **Never** use for sensitive data; parameters are visible in the URL and browser history. |
+| **POST** | Submit data (create/update). | Vulnerable to **SQL Injection** and **XSS** if input is not sanitized. |
+| **PUT** | Replace a resource. | Ensure strict **Authorization** so users can't overwrite files they don't own. |
+| **DELETE** | Remove a resource. | Improper access control here can lead to massive data loss. |
+
+### Secondary & Management Methods
+
+* **PATCH:** Makes partial updates to a resource (more efficient than PUT).
+* **HEAD:** Same as GET but returns **only headers** (no body). Used to check if a file exists or its size.
+* **OPTIONS:** Asks the server which methods are supported for a specific URL.
+* **TRACE:** Echoes the request back to the client. **Security Risk:** Usually disabled to prevent "Cross-Site Tracing" (XST) attacks.
+
+---
+
+## 🧠 Evolution of HTTP Versions
+
+* **HTTP/1.1:** The "Workhorse." Introduced **persistent connections**, allowing multiple requests over a single connection.
+* **HTTP/2:** Focuses on speed via **Multiplexing** (sending many requests at once) and header compression.
+* **HTTP/3:** Uses the **QUIC** protocol (based on UDP) to reduce latency and improve security in unstable network environments.
+
+---
+
+## 📝 Task 5 Answers
+
+* **Which HTTP protocol version became widely adopted and remains the most commonly used version...?**
+* `HTTP/1.1`
+
+
+* **Which HTTP request method describes the communication options for the target resource...?**
+* `OPTIONS`
+
+
+* **In an HTTP request, which component specifies the specific resource or endpoint...?**
+* `URL Path`
+
+
+
+---
+
+## 🛠️ HTTP Methods Cheat Sheet
+
+| Verb | Action | Typical Use Case |
+| --- | --- | --- |
+| `GET` | Read | Viewing a blog post or profile. |
+| `POST` | Create | Submitting a registration form. |
+| `PUT` | Update | Changing your entire user profile. |
+| `DELETE` | Delete | Closing an account or deleting a comment. |
+| `OPTIONS` | Query | Pre-flight check for CORS (Cross-Origin Resource Sharing). |
+
+---
