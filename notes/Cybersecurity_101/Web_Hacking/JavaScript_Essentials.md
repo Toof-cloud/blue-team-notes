@@ -131,3 +131,66 @@ for (let i = 0; i < 100; i++) {
 | **If Statement** | `if (condition) { ... } else { ... }` |
 
 ---
+# JavaScript Essentials — Task 3
+
+## JavaScript Overview
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Interpreted vs. Compiled
+
+Unlike languages like C++ or Java that need to be "compiled" into machine code before they can run, JavaScript is an **interpreted** language. This means the browser's engine (like Chrome's V8 engine) reads and executes the code line-by-line in real-time.
+
+### 🖥️ The Browser Console: A Pentester's Playground
+
+The Browser Console is the most direct way to interact with a web application's logic. By opening the DevTools (**Ctrl + Shift + I**), you can:
+
+* **Test Snippets:** Run small pieces of code to see how the site behaves.
+* **Modify Variables:** Change the values of variables in memory to bypass client-side checks.
+* **Debug Logic:** See error messages that might reveal information about the server-side backend.
+
+---
+
+## 🧱 Dissecting the Code
+
+In the example provided:
+
+```javascript
+let x = 10; // Variable declaration
+let y = 10; 
+let result = x + y; // Arithmetic expression
+console.log("The result is: " + result); // Output function
+
+```
+
+* **`let`**: Declares the variables $x$ and $y$.
+* **`console.log()`**: This is the standard way to output data to the developer tools. It does not appear on the actual webpage, making it a "hidden" log for developers (and curious hackers).
+
+---
+
+## 📝 Task 3 Answers
+
+* **What is the code output if the value of x is changed to 10?**
+* `The result is: 20`
+* *(Calculation: $10 + 10 = 20$)*
+
+
+* **Is JavaScript a compiled or interpreted language?**
+* `Interpreted`
+
+
+
+---
+
+## 🛠️ Browser Console Shortcuts
+
+| Action | Shortcut (Windows/Linux) |
+| --- | --- |
+| **Open DevTools** | `Ctrl + Shift + I` |
+| **Clear Console** | `Ctrl + L` |
+| **Multiline Code** | `Shift + Enter` |
+| **Inspect Element** | `Ctrl + Shift + C` |
+
+---
