@@ -517,3 +517,76 @@ This is the "payload" the server delivers to the user.
 | **`SameSite=Strict`** | Prevents the cookie from being sent on cross-site requests. | Cross-Site Request Forgery (CSRF) |
 
 ---
+# Web Application Basics — Task 9
+
+## Security Headers
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Hardening the Web Server
+
+Security headers are an additional layer of defense (Defense in Depth). Even if a web application has a vulnerability, these headers can instruct the browser to block the exploit from succeeding.
+
+### 🧱 Key Security Headers
+
+#### 🛡️ Content-Security-Policy (CSP)
+
+The CSP is a powerful "allow-list" for your browser. It tells the browser exactly which domains are trusted to run scripts, load images, or use CSS.
+
+* **Purpose:** Primarily prevents **Cross-Site Scripting (XSS)** and data injection attacks.
+* **Example:** `Content-Security-Policy: script-src 'self' https://scripts.trusted.com`
+* This means the browser will **only** execute scripts from the same origin or the specific trusted URL. Any other script (like one injected by a hacker) will be blocked.
+
+
+
+#### 🔒 Strict-Transport-Security (HSTS)
+
+HSTS tells the browser: "Never communicate with this site over unencrypted HTTP."
+
+* **Purpose:** Prevents **Man-in-the-Middle (MitM)** attacks and SSL stripping.
+* **Directive:** `includeSubDomains` ensures the policy covers `blog.site.com` as well as `site.com`.
+
+#### 🕵️ X-Content-Type-Options
+
+Browsers sometimes try to "guess" the file type (MIME-sniffing). If an attacker uploads a malicious script disguised as a `.jpg`, the browser might try to run it.
+
+* **Directive:** `nosniff` forces the browser to strictly follow the `Content-Type` header provided by the server.
+
+#### 🔗 Referrer-Policy
+
+When you click a link, your browser usually tells the new site where you came from. This can leak sensitive internal URLs or tokens.
+
+* **Purpose:** Controls how much "referral" data is shared with other sites.
+* **Common Setting:** `strict-origin-when-cross-origin` (shares full info within your own site, but only the domain name when leaving).
+
+---
+
+## 📝 Task 9 Answers
+
+* **In a Content Security Policy (CSP) configuration, which property can be set to define where scripts can be loaded from?**
+* `script-src`
+
+
+* **When configuring the HSTS header... which directive should be included to apply the security policy to both the main domain and its subdomains?**
+* `includeSubDomains`
+
+
+* **Which HTTP header directive is used to prevent browsers from interpreting files as a different MIME type... mitigating content type sniffing attacks?**
+* `nosniff`
+
+
+
+---
+
+## 🛠️ Security Header Audit Checklist
+
+| Header | Recommended Setting | Protection Provided |
+| --- | --- | --- |
+| **CSP** | `default-src 'self' ...` | XSS, Clickjacking, Injection |
+| **HSTS** | `max-age=31536000; includeSubDomains` | Protocol Downgrade / Sniffing |
+| **X-Content-Type** | `nosniff` | MIME-Sniffing / File Upload Exploits |
+| **Referrer-Policy** | `no-referrer` or `same-origin` | Information Leakage |
+
+---
