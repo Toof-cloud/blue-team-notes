@@ -468,3 +468,81 @@ To solve this, you can simply paste the expression into your **Browser Console**
 | **Hex Converter** | Decodes `\x41` into `A`. | CyberChef |
 
 ---
+# JavaScript Essentials — Task 8
+
+## Best Practices & Security
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Reducing the Attack Surface
+
+When developing or auditing a web application, how JavaScript is handled determines whether the site is a "fortress" or a "screen door."
+
+### 🧱 1. The Golden Rule: Never Trust the Client
+
+Client-side validation (e.g., checking if an email has an `@` symbol) is great for user experience, but it is **not** security.
+
+* **The Risk:** An attacker can use the browser console to bypass `if` statements or use tools like Burp Suite to send data directly to the server, skipping the JS checks entirely.
+* **The Fix:** Always perform **Server-Side Validation**.
+
+### ⚙️ 2. Supply Chain Security
+
+Using the `src` attribute to link libraries (like jQuery or Bootstrap) is common, but risky.
+
+* **The Risk:** Including a script from an untrusted or compromised CDN can lead to a **Supply Chain Attack**, where the malicious script steals your users' data.
+* **The Fix:** Only use trusted sources and use **Subresource Integrity (SRI)** hashes to ensure the file hasn't been tampered with.
+
+### 🔑 3. No Secrets in the Source
+
+If you can see it in "View Page Source," so can the hackers.
+
+* **The Risk:** Hardcoding API keys, passwords, or "hidden" admin URLs in `.js` files makes them public information.
+* **The Fix:** Store secrets in environment variables on the server and use backend proxies for API calls.
+
+---
+
+## 📝 Task 8 Answers
+
+* **Is it a good practice to blindly include JS in your code from any source (yea/nay)?**
+* `nay`
+
+
+
+---
+
+## 🛠️ JavaScript Essentials: Room Cheat Sheet
+
+### 1. Variables & Data
+
+* **`let` / `const**`: Modern, block-scoped declarations.
+* **`var`**: Older, function-scoped (avoid).
+* **`console.log()`**: Prints data to the browser's developer console.
+
+### 2. Dialogue Functions (XSS Proof-of-Concepts)
+
+* **`alert()`**: Pop-up box for notifications.
+* **`prompt()`**: Pop-up box for user input (returns a string).
+* **`confirm()`**: Pop-up box for Yes/No (returns `true`/`false`).
+
+### 3. Control Flow & DOM
+
+* **`if (condition) { ... } else { ... }`**: Decision-making logic.
+* **`for (let i=0; i < 10; i++) { ... }`**: Repeating actions.
+* **`document.getElementById("id")`**: How JS finds HTML elements to modify them.
+
+### 4. Code Protection
+
+* **Minification**: Compressing code (removing spaces) for speed.
+* **Obfuscation**: Making code unreadable to humans to hide logic.
+* **Deobfuscation**: Using tools or the browser's "Pretty Print" `{ }` to make code readable again.
+
+### 5. Pentester's Checklist
+
+* [ ] Check "View Source" for hardcoded credentials/API keys.
+* [ ] Look for external scripts (`src=`) from suspicious domains.
+* [ ] Try to bypass client-side form validation by manipulating variables in the Console.
+* [ ] Use "Pretty Print" on minified files to find hidden endpoints.
+
+---
