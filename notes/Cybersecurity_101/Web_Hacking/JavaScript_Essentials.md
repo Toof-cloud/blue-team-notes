@@ -332,3 +332,72 @@ When a security researcher finds a vulnerability, they often use `<script>alert(
 | **Action Verification** | `let deleteFile = confirm("Delete permanently?");` |
 
 ---
+# JavaScript Essentials — Task 6
+
+## Bypassing Control Flow Statements
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Logic and Control Flow
+
+Control flow is the "decision-making" engine of a script. It determines which path the code takes based on specific conditions. In cybersecurity, we often look for ways to manipulate these conditions to bypass security checks.
+
+### 🧱 Conditional Statements
+
+The most common structure is the `if-else` statement. It evaluates a condition in the parentheses; if it is **true**, the first block runs; if **false**, the `else` block runs.
+
+* **Example:**
+
+```javascript
+if (age >= 18) {
+    // This code runs if age is 18 or older
+} else {
+    // This code runs if age is 17 or younger
+}
+
+```
+
+---
+
+## 🧠 Security Perspective: Client-Side Bypass
+
+One of the most critical lessons in web security is: **Never trust the client.**
+
+If a developer writes login logic or "premium feature" checks entirely in JavaScript, a user can easily bypass them. Because JavaScript runs in *your* browser, you have full control over it.
+
+### How to Bypass JS Logic:
+
+1. **View Source:** Right-click and "View Page Source" to see the hardcoded credentials or the logic being used.
+2. **Console Manipulation:** You can open the DevTools Console and simply overwrite the variables or functions. If a script checks `if (isLoggedIn)`, you can type `isLoggedIn = true` in the console to bypass the check.
+3. **Breakpoint Debugging:** You can use the "Sources" tab in DevTools to pause the code right at the `if` statement and force it to take the "true" path.
+
+---
+
+## 📝 Task 6 Answers
+
+* **What is the message displayed if you enter the age less than 18?**
+* `You are a minor.`
+
+
+* **What is the password for the user admin?**
+* `p@ssw0rd123`
+* *(Note: To find this, open the `login.html` file in the exercise folder, right-click, and select **View Page Source**. Look for the `if` statement comparing the password variable).*
+
+
+
+---
+
+## 🛠️ Comparison Operators Cheat Sheet
+
+| Operator | Meaning | Example |
+| --- | --- | --- |
+| `==` | Equal to | `x == 5` |
+| `===` | Strict equal (value & type) | `x === "5"` |
+| `!=` | Not equal | `x != 10` |
+| `>=` | Greater than or equal | `age >= 18` |
+| `&&` | Logical AND | `user == "admin" && pass == "123"` |
+| ` |  | ` |
+
+---
