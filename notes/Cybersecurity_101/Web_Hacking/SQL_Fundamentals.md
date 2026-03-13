@@ -370,4 +370,91 @@ In the hands of an attacker, these operations are devastating:
 | **Update** | `UPDATE` | `UPDATE users SET role = "admin" WHERE id = 5;` |
 | **Delete** | `DELETE` | `DELETE FROM logs WHERE date < "2025-01-01";` |
 
+---# SQL Fundamentals — Task 6
+
+## SQL Clauses
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 What is a Clause?
+
+A clause is a modifier used within a SQL statement to refine, filter, or organize the data you are manipulating. While `SELECT` tells the database *what* to get, clauses tell it *how* to present or limit that data.
+
+### 🧱 Essential Clauses for Data Analysis
+
+| Clause | Purpose | Key Behavior |
+| --- | --- | --- |
+| **`DISTINCT`** | Removes duplicates. | Returns only unique values from a column. |
+| **`ORDER BY`** | Sorts the results. | Use `ASC` (default) for A-Z/1-9 or `DESC` for Z-A/9-1. |
+| **`GROUP BY`** | Aggregates data. | Groups identical data into single rows (often used with `COUNT`). |
+| **`HAVING`** | Filters groups. | Like `WHERE`, but acts **after** data has been grouped. |
+
+---
+
+## 🔍 Deep Dive: Organizing the Results
+
+### 1. Sorting with `ORDER BY`
+
+Sorting is crucial for finding the "most recent" logs or the "highest" values in a dataset.
+
+* **Ascending:** `SELECT * FROM books ORDER BY name ASC;` (Alphabetical A-Z)
+* **Descending:** `SELECT * FROM books ORDER BY published_date DESC;` (Newest to Oldest)
+
+### 2. Aggregating with `GROUP BY` and `HAVING`
+
+If you want to see how many tools exist in each category, you group them.
+
+```sql
+SELECT category, COUNT(*) 
+FROM hacking_tools 
+GROUP BY category 
+HAVING COUNT(*) > 5;
+
+```
+
+* **Logic:** This groups the tools by category and then only shows categories that have more than 5 tools.
+
+---
+
+## 🧠 Security Perspective: The `WHERE` vs. `HAVING` Trap
+
+Attackers often use these clauses during **Blind SQL Injection**.
+
+* A `WHERE` clause filters rows **before** they are calculated.
+* A `HAVING` clause filters **after** calculations.
+If an attacker can't see the data directly, they might use `HAVING` to ask the database "Is the count of admin users equal to 1?" and observe the server's response time or error messages to confirm their theory.
+
+---
+
+## 📝 Task 6 Answers
+
+* **Using tools_db... what is the total number of distinct categories in the hacking_tools table?**
+* `6`
+* *(Method: `SELECT DISTINCT category FROM hacking_tools;` and count the rows).*
+
+
+* **Using tools_db... what is the first tool (by name) in ascending order?**
+* `Aircrack-ng`
+* *(Method: `SELECT name FROM hacking_tools ORDER BY name ASC LIMIT 1;`)*
+
+
+* **Using tools_db... what is the first tool (by name) in descending order?**
+* `ZAP`
+* *(Method: `SELECT name FROM hacking_tools ORDER BY name DESC LIMIT 1;`)*
+
+
+
+---
+
+## 🛠️ Clauses Cheat Sheet
+
+| SQL Fragment | Result |
+| --- | --- |
+| `SELECT DISTINCT city` | List of unique cities only. |
+| `ORDER BY price DESC` | Most expensive items first. |
+| `GROUP BY user_id` | Combines all actions by a specific user. |
+| `HAVING SUM(total) > 100` | Only shows groups with a total over 100. |
+
 ---
