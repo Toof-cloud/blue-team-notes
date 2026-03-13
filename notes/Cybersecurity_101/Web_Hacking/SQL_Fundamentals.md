@@ -293,3 +293,81 @@ They use `SHOW DATABASES;` and `SHOW TABLES;` to map out where the sensitive inf
 | `DESC table_name;` | Quick check of your table's design. |
 
 ---
+# SQL Fundamentals — Task 5
+
+## CRUD Operations
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Core of Data Management: CRUD
+
+**CRUD** is an acronym that describes the four basic operations you can perform on any data-driven system. In SQL, these map directly to specific statements.
+
+### 🧱 1. Create (**INSERT**)
+
+Used to add new rows of data into a table.
+
+* **Syntax:** `INSERT INTO table_name (column1, column2) VALUES (value1, value2);`
+* **Note:** Strings and dates must be enclosed in quotes (e.g., `"2024-10-14"`).
+
+### 🔍 2. Read (**SELECT**)
+
+Used to retrieve data. This is the most common operation in SQL.
+
+* **Select All:** `SELECT * FROM table_name;` (The `*` is a wildcard for "all columns").
+* **Select Specific:** `SELECT column1, column2 FROM table_name;`
+
+### ⚙️ 3. Update (**UPDATE**)
+
+Used to modify existing records.
+
+* **Syntax:** `UPDATE table_name SET column_name = "new_value" WHERE condition;`
+* **⚠️ CRITICAL:** Always use a `WHERE` clause. If you forget it, SQL will update **every single row** in the table with the new value.
+
+### 🗑️ 4. Delete (**DELETE**)
+
+Used to remove records.
+
+* **Syntax:** `DELETE FROM table_name WHERE condition;`
+* **⚠️ CRITICAL:** Like Update, if you omit the `WHERE` clause, you will delete **all data** in the table.
+
+---
+
+## 🧠 Security Perspective: The Danger of CRUD
+
+In the hands of an attacker, these operations are devastating:
+
+* **Unauthorized SELECT:** Leaking user passwords or PII (Personally Identifiable Information).
+* **Unauthorized UPDATE:** Changing an account's permission level to "admin."
+* **Unauthorized DELETE:** Wiping evidence from log tables or destroying a company's database.
+* **Unauthorized INSERT:** Creating a "backdoor" admin user.
+
+---
+
+## 📝 Task 5 Answers
+
+* **Using tools_db... what is the name of the tool in the hacking_tools table used for MITM attacks on wireless networks?**
+* `WiFi PineApple`
+* *(Method: `USE tools_db;` then `SELECT name FROM hacking_tools WHERE description LIKE '%wireless%';`)*
+
+
+* **Using tools_db... what is the shared category for both USB Rubber Ducky and Bash Bunny?**
+* `Physical Access`
+* *(Method: `SELECT category FROM hacking_tools WHERE name = "USB Rubber Ducky";`)*
+
+
+
+---
+
+## 🛠️ CRUD Quick-Reference
+
+| Operation | SQL Command | Example |
+| --- | --- | --- |
+| **Create** | `INSERT` | `INSERT INTO users (name) VALUES ("poopi");` |
+| **Read** | `SELECT` | `SELECT * FROM hacking_tools;` |
+| **Update** | `UPDATE` | `UPDATE users SET role = "admin" WHERE id = 5;` |
+| **Delete** | `DELETE` | `DELETE FROM logs WHERE date < "2025-01-01";` |
+
+---
