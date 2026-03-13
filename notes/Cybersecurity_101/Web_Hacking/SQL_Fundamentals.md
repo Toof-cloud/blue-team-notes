@@ -535,3 +535,104 @@ The `%` in a `LIKE` operator is a wildcard that represents "any number of charac
 | Filter by date range | `WHERE date BETWEEN "2025-01-01" AND "2025-12-31"` |
 
 ---
+# SQL Fundamentals — Task 8
+
+## SQL Functions
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Power Up Your Queries
+
+Functions are built-in tools that allow you to transform data or perform calculations on the fly. Instead of just pulling raw data, you can ask the database to "calculate the total," "shorten this text," or "combine these columns."
+
+### 🧱 String Functions
+
+These manipulate text data within your columns.
+
+| Function | Purpose | Example Result |
+| --- | --- | --- |
+| **`CONCAT()`** | Joins two or more strings. | `"Nmap" + " is a tool"` → `"Nmap is a tool"` |
+| **`SUBSTRING()`** | Extracts a specific part of a string. | `SUBSTRING("2026-03-13", 1, 4)` → `"2026"` |
+| **`LENGTH()`** | Counts characters (including spaces). | `LENGTH("Kali")` → `4` |
+| **`GROUP_CONCAT()`** | Squashes multiple rows into one string. | `Category: Web |
+
+---
+
+### ⚙️ Aggregate Functions
+
+These look at a whole column of data across multiple rows and return a single summary value.
+
+* **`COUNT()`**: Returns the total number of rows.
+* **`SUM()`**: Adds up all numeric values in a column.
+* **`MAX()` / `MIN()**`: Finds the highest or lowest value (works for numbers and dates).
+
+---
+
+## 🧠 Security Perspective: Fingerprinting
+
+Functions are often used by security researchers to "fingerprint" a database. Since different DBMSs (MySQL, PostgreSQL, MS-SQL) use slightly different function names or syntax, an attacker might try a query like `SELECT version();` or `SELECT user();`.
+
+If the database responds with a specific version number, the attacker knows exactly which exploits to look for.
+
+---
+
+## 📝 Task 8 Answers
+
+* **Using tools_db... what is the tool with the longest name based on character length?**
+* `The Advanced Land Mobile Transceiver`
+* *(Method: `SELECT name FROM hacking_tools ORDER BY LENGTH(name) DESC LIMIT 1;`)*
+
+
+* **Using tools_db... what is the total sum of all tools?**
+* `2947`
+* *(Method: `SELECT SUM(amount) FROM hacking_tools;`)*
+
+
+* **Using tools_db... tool names where amount does not end in 0, grouped and concatenated by " & ".**
+* `HackRF One & Flipper Zero`
+* *(Method: `SELECT GROUP_CONCAT(name SEPARATOR " & ") FROM hacking_tools WHERE amount NOT LIKE "%0";`)*
+
+
+
+---
+
+## 🛠️ SQL Master Cheat Sheet
+
+### 🏗️ Structure
+
+| Goal | Command |
+| --- | --- |
+| **Start SQL** | `mysql -u root -p` |
+| **Select Database** | `USE database_name;` |
+| **See Tables** | `SHOW TABLES;` |
+| **Check Schema** | `DESCRIBE table_name;` |
+
+### 🔍 Retrieval (Read)
+
+| Goal | SQL Fragment |
+| --- | --- |
+| **Get All** | `SELECT * FROM table;` |
+| **Unique Values** | `SELECT DISTINCT column FROM table;` |
+| **Filter Pattern** | `WHERE name LIKE "admin%";` |
+| **Sort Z to A** | `ORDER BY name DESC;` |
+
+### ✍️ Manipulation (CUD)
+
+| Goal | SQL Fragment |
+| --- | --- |
+| **Add Data** | `INSERT INTO table (cols) VALUES (vals);` |
+| **Change Data** | `UPDATE table SET col = val WHERE id = 1;` |
+| **Remove Data** | `DELETE FROM table WHERE id = 1;` |
+
+### 🧮 Calculations
+
+| Goal | SQL Fragment |
+| --- | --- |
+| **Total Rows** | `SELECT COUNT(*) FROM table;` |
+| **Total Value** | `SELECT SUM(column) FROM table;` |
+| **Find Newest** | `SELECT MAX(date_col) FROM table;` |
+
+---
+
