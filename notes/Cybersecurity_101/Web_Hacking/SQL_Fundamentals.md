@@ -58,3 +58,87 @@ In this room, you will transition from a "data consumer" to a "data commander" b
 | **Query** | A specific request for information from a database. |
 
 ---
+# SQL Fundamentals — Task 2
+
+## Databases 101
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 What is a Database?
+
+A database is an organized collection of structured information designed for easy access, management, and analysis. Think of it as a highly advanced digital filing cabinet.
+
+From a security perspective, understanding the **structure** of a database is the first step toward protecting it from unauthorized manipulation.
+
+---
+
+## 🧱 SQL vs. NoSQL: The Two Main Types
+
+Choosing a database depends entirely on the **consistency** of the data being stored.
+
+| Feature | Relational (SQL) | Non-Relational (NoSQL) |
+| --- | --- | --- |
+| **Structure** | Tabular (Rows & Columns) | Document, Key-Value, or Graph |
+| **Schema** | Rigid/Pre-defined | Flexible/Dynamic |
+| **Best For** | Consistent data (e.g., Banking, E-commerce) | Varying data (e.g., Social Media, Big Data) |
+| **Example** | MySQL, PostgreSQL, SQLite | MongoDB, Cassandra, Redis |
+
+---
+
+## 📊 Tables, Rows, and Columns
+
+In a relational database, data is organized into **Tables**.
+
+* **Columns:** Define the *category* of data (e.g., `username`, `email`, `id`). Each column has a specific **Data Type** (String, Integer, Date).
+* **Rows:** Represent a *single record* of data (e.g., one specific user's details).
+
+---
+
+## 🔑 Primary and Foreign Keys: The "Glue"
+
+Relational databases are called "relational" because tables can be linked together. We use **Keys** to create these connections.
+
+1. **Primary Key (PK):** A unique identifier for every record in a table. It ensures no two rows are identical (like a SSN or a Student ID). **Rule:** Only one per table.
+2. **Foreign Key (FK):** A column in one table that points to the Primary Key of *another* table. This creates the link between them.
+
+> **Example:** In a bookstore database, the `Books` table might have an `author_id` (Foreign Key) that links to the `id` (Primary Key) in the `Authors` table.
+
+---
+
+## 📝 Task 2 Answers
+
+* **What type of database should you consider using if the data... will vary greatly in its format?**
+* `Non-relational databases`
+
+
+* **What type of database should you consider using if the data... will reliably be in the same structured format?**
+* `Relational databases`
+
+
+* **In our example, once a record of a book is inserted... it would be represented as a ___?**
+* `row`
+
+
+* **Which type of key provides a link from one table to another?**
+* `Foreign Keys`
+
+
+* **Which type of key ensures a record is unique within a table?**
+* `Primary Keys`
+
+
+
+---
+
+## 🛠️ Data Type Cheat Sheet
+
+| Type | Description | Example |
+| --- | --- | --- |
+| **String/Varchar** | Text and characters | `"Alice"`, `"p@ssword123"` |
+| **Integer** | Whole numbers | `1`, `42`, `-500` |
+| **Float/Decimal** | Numbers with decimals | `19.99`, `3.14` |
+| **Date/Time** | Calendar dates and timestamps | `2026-03-13` |
+
+---
