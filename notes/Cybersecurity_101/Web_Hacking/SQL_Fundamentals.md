@@ -142,3 +142,74 @@ Relational databases are called "relational" because tables can be linked togeth
 | **Date/Time** | Calendar dates and timestamps | `2026-03-13` |
 
 ---
+# SQL Fundamentals — Task 3
+
+## SQL Overview
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Bridge: DBMS and SQL
+
+A database by itself is just a file or a collection of data. To actually "talk" to it, you need two things: a **DBMS** and a **Language**.
+
+### 🧱 1. Database Management System (DBMS)
+
+The DBMS is the software interface that handles the heavy lifting of storing, retrieving, and securing data.
+
+* **Examples:** MySQL, PostgreSQL, Oracle, SQLite.
+* **Security Context:** Misconfigured DBMS settings (like allowing remote root access or using default passwords) are common entry points for attackers.
+
+### ⚙️ 2. Structured Query Language (SQL)
+
+SQL is the standardized programming language used to manage relational databases. It is designed to be highly readable—almost like writing instructions in plain English.
+
+* **Declarative:** You tell the database *what* you want (e.g., "Give me all usernames"), and the DBMS figures out *how* to get it.
+
+---
+
+## 🧠 Why SQL is a "Top-Tier" Skill
+
+* **Performance:** Relational databases are optimized to search through millions of records in milliseconds.
+* **Human-Readable:** Commands like `SELECT`, `INSERT`, and `DELETE` make the logic easy to follow.
+* **Data Integrity:** Because of strict schemas (pre-defined structures), SQL databases prevent "garbage" data from being entered, ensuring accuracy for critical systems like banking.
+
+---
+
+## 🛠️ Hands-On: Accessing the Database
+
+In a typical Linux environment (like the TryHackMe VM), you interact with the database through the terminal.
+
+1. **Command:** `mysql -u root -p`
+* `-u root`: Log in as the "root" (admin) user.
+* `-p`: Prompt for a password.
+
+
+2. **Semicolon ( ; ):** In SQL, every command **must** end with a semicolon. If you forget it, the DBMS will keep waiting for more input.
+
+---
+
+## 📝 Task 3 Answers
+
+* **What serves as an interface between a database and an end user?**
+* `Database Management System` (or `DBMS`)
+
+
+* **What query language can be used to interact with a relational database?**
+* `SQL`
+
+
+
+---
+
+## 🛠️ SQL Terminal Cheat Sheet
+
+| Command | Action |
+| --- | --- |
+| `mysql -u [user] -p` | Log into the MySQL monitor. |
+| `help;` or `\h` | View help documentation. |
+| `\c` | Clear the current input statement (if you made a typo). |
+| `exit` or `quit` | Leave the MySQL monitor. |
+
+---
