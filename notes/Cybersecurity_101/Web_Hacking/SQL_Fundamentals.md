@@ -213,3 +213,83 @@ In a typical Linux environment (like the TryHackMe VM), you interact with the da
 | `exit` or `quit` | Leave the MySQL monitor. |
 
 ---
+# SQL Fundamentals — Task 4
+
+## Database and Table Statements
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Managing Databases
+
+Before you can store data, you must build the "container" for it. In SQL, this involves a hierarchy: you create a **Database**, and inside that database, you create **Tables**.
+
+### 🧱 Database Commands
+
+| Command | Action |
+| --- | --- |
+| `CREATE DATABASE name;` | Creates a new database container. |
+| `SHOW DATABASES;` | Lists all databases on the server. |
+| `USE name;` | Selects a database to work with (Essential before running queries). |
+| `DROP DATABASE name;` | **Destructive:** Deletes the database and all its data. |
+
+---
+
+## ⚙️ Table Statements
+
+Tables require more detail because you must define the **Schema** (the structure of the columns).
+
+### 🏗️ Creating a Table
+
+When you create a table, you specify the column names, their data types, and any **constraints**:
+
+* **`INT`**: For whole numbers.
+* **`VARCHAR(size)`**: For text (up to a specific character limit).
+* **`AUTO_INCREMENT`**: Automatically adds 1 to the ID for every new row.
+* **`NOT NULL`**: Ensures the column cannot be left empty.
+* **`PRIMARY KEY`**: Marks the column as the unique identifier for the table.
+
+### 🛠️ Table Management
+
+* **`SHOW TABLES;`**: Lists all tables in your current active database.
+* **`DESCRIBE table_name;`**: Shows the structure (columns and types) of a table.
+* **`ALTER TABLE table_name ADD column_name type;`**: Adds a new column to an existing table without deleting the data.
+* **`DROP TABLE table_name;`**: Deletes the table entirely.
+
+---
+
+## 🧠 Security Perspective: Information Schema
+
+When an attacker gains access to a SQL terminal (via SQL Injection or compromised credentials), their first step is usually **Enumeration**.
+They use `SHOW DATABASES;` and `SHOW TABLES;` to map out where the sensitive information is stored.
+
+> **Pro Tip:** In MySQL, the `information_schema` database is a "meta-database" that contains information about all other databases. Attackers often query this to find table names without needing to Guess.
+
+---
+
+## 📝 Task 4 Answers
+
+* **Using the statement you've learned to list all databases... what is the flag for a name?**
+* `THM{SHOW_DATABASES_FLAG}`
+* *(Note: Run `SHOW DATABASES;` in your terminal to see it).*
+
+
+* **Set task_4_db as your active database and list all tables... what is the flag present here?**
+* `THM{SHOW_TABLES_FLAG}`
+* *(Note: Run `USE task_4_db;` then `SHOW TABLES;`).*
+
+
+
+---
+
+## 🛠️ Table Building Cheat Sheet
+
+| SQL Fragment | Purpose |
+| --- | --- |
+| `book_id INT PRIMARY KEY` | Creates a unique ID number. |
+| `book_name VARCHAR(100)` | Stores a title up to 100 characters. |
+| `pub_date DATE` | Stores the date of publication. |
+| `DESC table_name;` | Quick check of your table's design. |
+
+---
