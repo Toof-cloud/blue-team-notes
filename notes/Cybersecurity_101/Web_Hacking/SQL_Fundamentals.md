@@ -458,3 +458,80 @@ If an attacker can't see the data directly, they might use `HAVING` to ask the d
 | `HAVING SUM(total) > 100` | Only shows groups with a total over 100. |
 
 ---
+# SQL Fundamentals — Task 7
+
+## SQL Operators
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Logic and Comparison in SQL
+
+Operators are the tools we use to filter data based on specific conditions. They allow us to move beyond simple "show me everything" queries and start asking the database very specific questions.
+
+### 🧱 Logical Operators
+
+These operators handle multiple conditions or pattern matching.
+
+| Operator | Purpose | Example |
+| --- | --- | --- |
+| **`LIKE`** | Pattern matching using wildcards (`%`). | `WHERE name LIKE "%Android%"` (Finds "Android Security") |
+| **`AND`** | All conditions must be true. | `WHERE cat="Admin" AND status="Active"` |
+| **`OR`** | At least one condition must be true. | `WHERE cat="Web" OR cat="Network"` |
+| **`NOT`** | Reverses the condition. | `WHERE NOT status="Deleted"` |
+| **`BETWEEN`** | Checks for a range (inclusive). | `WHERE price BETWEEN 10 AND 50` |
+
+---
+
+## ⚙️ Comparison Operators
+
+Used to compare values, dates, and numbers.
+
+| Operator | Meaning | Use Case |
+| --- | --- | --- |
+| **`=`** | Equal to | `WHERE id = 1` |
+| **`!=`** or **`<>`** | Not equal to | `WHERE category != "Public"` |
+| **`<`** / **`>`** | Less than / Greater than | `WHERE published_date < "2020-01-01"` |
+| **`<=`** / **`>=`** | Less/Greater than or equal to | `WHERE amount >= 100` |
+
+---
+
+## 🧠 Security Perspective: Wildcard Abuse
+
+The `%` in a `LIKE` operator is a wildcard that represents "any number of characters."
+
+* **Pentesting Tip:** Attackers often use `LIKE "%"` in login fields or search bars to bypass filters or map out database entries. If a search bar is vulnerable to SQL Injection, entering `' OR name LIKE '%' --` might return every user in the database.
+
+---
+
+## 📝 Task 7 Answers
+
+* **Using tools_db... which tool falls under the Multi-tool category and is useful for pentesters and geeks?**
+* `Flipper Zero`
+* *(Method: `SELECT name FROM hacking_tools WHERE category = "Multi-tool" AND description LIKE "%pentesters%" AND description LIKE "%geeks%";`)*
+
+
+* **Using tools_db... what is the category of tools with an amount greater than or equal to 300?**
+* `Hardware`
+* *(Method: `SELECT DISTINCT category FROM hacking_tools WHERE amount >= 300;`)*
+
+
+* **Using tools_db... which tool falls under the Network intelligence category with an amount less than 100?**
+* `WiFi Deauther`
+* *(Method: `SELECT name FROM hacking_tools WHERE category = "Network intelligence" AND amount < 100;`)*
+
+
+
+---
+
+## 🛠️ Operators Cheat Sheet
+
+| Query Goal | SQL Fragment |
+| --- | --- |
+| Find names starting with "A" | `WHERE name LIKE "A%"` |
+| Find names ending with "s" | `WHERE name LIKE "%s"` |
+| Exclude a specific ID | `WHERE id != 10` |
+| Filter by date range | `WHERE date BETWEEN "2025-01-01" AND "2025-12-31"` |
+
+---
