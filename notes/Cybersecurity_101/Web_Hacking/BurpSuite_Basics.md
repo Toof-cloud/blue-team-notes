@@ -131,3 +131,68 @@ Because Burp Suite is written in **Java**, it is "Platform Independent." Whether
 * **Extensibility:** If Burp doesn't do something you need, there is likely an extension in the **BApp Store** that does.
 
 ---
+# Burp Suite: The Basics — Task 3
+
+## Features of Burp Community
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Pentester's Toolkit
+
+Even in the free Community Edition, Burp Suite provides the essential modules needed to conduct a thorough manual security assessment. Understanding when to switch between these tools is key to an efficient workflow.
+
+### 🧱 Core Feature Breakdown
+
+| Feature | Primary Function | Pentesting Use Case |
+| --- | --- | --- |
+| **Proxy** | Traffic Interception | Pausing a request to modify a hidden form field or cookie value. |
+| **Repeater** | Manual Request Testing | Tweaking an SQL injection payload and resending it to see the server's error message. |
+| **Intruder** | Automated Attacks | Testing a list of 1,000 common passwords against a single username. |
+| **Decoder** | Data Transformation | Converting a suspicious Base64 string back into readable text. |
+| **Comparer** | Visual Comparison | Comparing a successful login response vs. a failed one to find tiny timing or size differences. |
+| **Sequencer** | Randomness Analysis | Checking if session cookies are truly random or if they follow a predictable pattern. |
+
+---
+
+## ⚙️ Extending the Suite: The BApp Store
+
+One of Burp's greatest strengths is its extensibility. Because it runs on Java, it can integrate modules written in **Java, Python (Jython), or Ruby (JRuby)**.
+
+* **Extender:** The module used to manage and load your extensions.
+* **BApp Store:** An in-app marketplace where you can download community-made tools.
+* **Popular Community Extension:** **Logger++**, which provides a much more detailed history of all traffic moving through every Burp module, not just the Proxy.
+
+---
+
+## 🧠 Workflow Tip: The Right Tool for the Job
+
+* Use **Proxy** for general browsing and finding interesting endpoints.
+* Use **Repeater** once you find a specific request you want to "poke" repeatedly.
+* Use **Intruder** only when you have a large list of data (like a wordlist) to test.
+
+---
+
+## 📝 Task 3 Answers
+
+* **Which Burp Suite feature allows us to intercept requests between ourselves and the target?**
+* `Proxy`
+
+
+* **Which Burp tool would we use to brute-force a login form?**
+* `Intruder`
+
+
+
+---
+
+## 🛠️ Data Transformation Quick-Reference (Decoder)
+
+When you see data that looks like this in the Proxy, use **Decoder**:
+
+* `%20`, `%27`, `%22` $\rightarrow$ **URL Encoding** (Space, Single Quote, Double Quote)
+* `YWRtaW4=` $\rightarrow$ **Base64 Encoding** ("admin")
+* `&#60;` $\rightarrow$ **HTML Entities** ("<")
+
+---
