@@ -196,3 +196,63 @@ When you see data that looks like this in the Proxy, use **Decoder**:
 * `&#60;` $\rightarrow$ **HTML Entities** ("<")
 
 ---
+# Burp Suite: The Basics — Task 4
+
+## Installation
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Getting Burp Suite on Your Machine
+
+Burp Suite is versatile and can be installed on almost any operating system thanks to its Java foundation. Whether you are using the provided **AttackBox** or your own **Mac** or **Kali Linux** setup, the process is straightforward.
+
+### 🧱 Platform-Specific Guides
+
+| Platform | Installation Method |
+| --- | --- |
+| **AttackBox** | **Pre-installed.** No action required. Just search for "Burp" in the applications menu. |
+| **Kali Linux** | **Pre-installed.** If missing, run: `sudo apt update && sudo apt install burpsuite`. |
+| **macOS** | Download the `.dmg` installer from PortSwigger. Drag and drop to Applications. |
+| **Windows** | Download the `.exe` installer. Follow the setup wizard (defaults are fine). |
+| **Linux (Other)** | Download the `.sh` script. Run it with `chmod +x` and execute. |
+
+---
+
+## ⚙️ Installation Best Practices
+
+* **Use the Installer:** While Burp is available as a standalone `.jar` file, using the dedicated installers for Windows, macOS, or Linux is better because they include a **private Java Runtime Environment (JRE)**. This ensures Burp has the exact version of Java it needs to run smoothly.
+* **Permissions (Linux):** If you install without `sudo`, Burp lives in your home directory (`~/BurpSuiteCommunity/`). This is safer for your system but means you'll have to manually add it to your PATH if you want to launch it from the terminal by just typing `burpsuite`.
+
+---
+
+## 🧠 Security Perspective: Keep it Updated
+
+PortSwigger releases updates for Burp Suite frequently. These updates often include:
+
+* **New BApp Store extensions.**
+* **Security patches** for the internal browser.
+* **New vulnerability definitions** for the issue library.
+Always check the **Dashboard** (which we will cover next) for the update notification bar.
+
+---
+
+## 📝 Task 4 Answers
+
+* **If you have chosen not to use the AttackBox, ensure you have a copy of Burp Suite installed...**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Launching Burp for the First Time
+
+When you first open Burp, you will see a splash screen. For the Community Edition:
+
+1. **Project Type:** You will be forced to select **"Temporary Project"** (Saving projects is a Pro feature).
+2. **Configuration:** Choose **"Use Burp defaults"**.
+3. **Start Burp:** Click the button and wait for the Dashboard to load.
+
+---
