@@ -789,3 +789,74 @@ In a professional environment, scoping isn't just for convenience—it's for **l
 | **Reset Intercept** | If you accidentally "Forward" a request you didn't mean to, check the **HTTP History** to see what was sent. |
 
 ---
+# Burp Suite: The Basics — Task 13
+
+## Proxying HTTPS
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Encryption Hurdle
+
+When you use a proxy to intercept **HTTPS** traffic, you are essentially performing a **Man-in-the-Middle (MITM)**. Under normal circumstances, your browser expects a certificate signed by a known "Certificate Authority" (CA) like DigiCert or Let's Encrypt.
+
+Because Burp Suite needs to read your encrypted data, it creates its own certificate to "pretend" to be the website you are visiting. Browsers (like the one on your **Mac** or **Kali** VM) will see this unrecognized certificate and block the connection for your safety.
+
+---
+
+## ⚙️ How to Trust the Burp CA
+
+To fix this, you must tell your browser that PortSwigger (Burp's creator) is a trusted authority. Once trusted, your browser will allow Burp to decrypt and re-encrypt traffic seamlessly.
+
+### 🧱 The 3-Step Setup
+
+1. **Download the Certificate:** * Ensure FoxyProxy is **ON** and pointing to Burp.
+* In your browser, go to `http://burp/cert`.
+* A file named `cacert.der` will download.
+
+
+2. **Import to Browser:** * In Firefox, go to `about:preferences` and search for **Certificates**.
+* Click **View Certificates** -> **Authorities** -> **Import**.
+* Select the `cacert.der` file.
+
+
+3. **Establish Trust:** * **CRITICAL:** When the pop-up appears, you must check the box: **"Trust this CA to identify websites"**.
+* Click OK and restart your browser.
+
+
+
+---
+
+## 🔍 Why `http://burp`?
+
+Burp Suite hosts a tiny local web server on its listener port (usually `8080`). When you type `http://burp` while the proxy is active, Burp intercepts that request itself and serves a special internal page where you can download the certificate or check your connection status.
+
+---
+
+## 🧠 Security Perspective: The "Privacy" Trade-off
+
+By installing this certificate, you are giving Burp Suite the power to see **everything** you do in that browser, including passwords and banking details if you visit those sites.
+
+* **Pentesting Best Practice:** Never install the Burp CA in your "daily driver" browser where you check personal email or social media. Keep a dedicated browser (like Firefox Developer Edition or the built-in Burp Browser) specifically for security work.
+
+---
+
+## 📝 Task 13 Answers
+
+* **If you are not using the AttackBox, configure Firefox... to accept the PortSwigger CA certificate.**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ HTTPS Troubleshooting
+
+If you still see "Secure Connection Failed" after importing:
+
+* **Check the Date:** Ensure your system clock is correct. Certificates are time-sensitive.
+* **Double Check Trust:** Go back to the Certificate Manager, find "PortSwigger," click **Edit Trust**, and ensure the checkbox is actually checked.
+* **HSTS Sites:** Some sites (like Google or Facebook) use **HSTS**, which is extra strict. If the certificate isn't perfect, they will block it entirely with no "Advanced > Proceed" option.
+
+---
