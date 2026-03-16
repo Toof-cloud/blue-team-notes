@@ -373,3 +373,79 @@ In the middle of a pentest, clicking through menus wastes time. Professional res
 * **The Intercept Button:** In the **Proxy > Intercept** tab, this is the most clicked button in Burp. It toggles whether traffic is paused or allowed to flow through.
 
 ---
+# Burp Suite: The Basics — Task 7
+
+## Options and Settings
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 User vs. Project Settings
+
+Configuring Burp Suite correctly is the difference between a cluttered workspace and an efficient one. Burp divides its settings into two distinct scopes to give you maximum control.
+
+### 🧱 1. User Settings (Global)
+
+These settings follow **you**, the user. They are saved to your local machine and applied every time you open Burp.
+
+* **Examples:** Display themes (Dark Mode!), keyboard shortcuts, and update preferences.
+* **Best For:** Personalizing your environment so it feels consistent across every engagement.
+
+### 🧱 2. Project Settings
+
+These settings follow the **target**. They are specific to the individual work you are doing right now.
+
+* **Examples:** Scope definitions, specific proxy listeners, and handling session cookies.
+* **⚠️ Community Note:** Since Community Edition doesn't allow saving projects, these settings are wiped every time you close the application.
+
+---
+
+## ⚙️ Navigating the Settings Window
+
+The settings menu in modern Burp versions is centralized. You can access it via the **Settings** button in the top navigation bar.
+
+* **The Search Bar:** This is the most efficient way to find a setting. Instead of clicking through categories, type "Hotkeys" or "Proxy" to jump straight there.
+* **Categories:** Settings are grouped logically (e.g., Network, Tools, User Interface).
+* **Contextual Shortcuts:** Many modules have a "Settings" button within their own tab that acts as a shortcut to the relevant section in the main Settings window.
+
+---
+
+## 🧠 Security Perspective: The Cookie Jar
+
+Burp maintains a **"Cookie Jar"** in the background. As you browse, it stores the cookies set by the server.
+
+* **Why it matters:** Other Burp tools (like Scanner or Intruder) can use the cookies in the jar to maintain a valid session while performing automated attacks. This prevents you from being logged out mid-test.
+
+---
+
+## 📝 Task 7 Answers
+
+* **In which category can you find a reference to a "Cookie jar"?**
+* `Sessions`
+
+
+* **In which base category can you find the "Updates" sub-category...?**
+* `Suite`
+
+
+* **What is the name of the sub-category which allows you to change the keybindings...?**
+* `Hotkeys`
+
+
+* **If we have uploaded Client-Side TLS certificates, can we override these on a per-project basis (yea/nay)?**
+* `yea`
+
+
+
+---
+
+## 🛠️ Settings Quick-Tips
+
+| Feature | Tip |
+| --- | --- |
+| **Dark Mode** | Go to **User Interface > Display** and change the "Look and feel" to **Darcula**. |
+| **Font Size** | If the text is too small on your high-res Mac screen, adjust it in **User Interface > Display**. |
+| **Proxy Port** | If port 8080 is blocked, search for **Proxy Listener** to change it to 8081 or 8888. |
+
+---
