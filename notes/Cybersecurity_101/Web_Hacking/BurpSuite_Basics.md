@@ -657,3 +657,63 @@ Attackers love the Site Map because it often reveals **API endpoints** and **dev
 * **Right-Click > Engagement Tools (Pro Only):** Allows for automated discovery, but in Community, you'll be doing this manually by clicking every link you find.
 
 ---
+# Burp Suite: The Basics — Task 11
+
+## The Burp Suite Browser
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The "Easy Button" for Interception
+
+If configuring FoxyProxy or messing with system certificates feels tedious, Burp Suite provides a built-in solution: the **Burp Browser**. This is a modified version of **Chromium** that comes bundled with Burp Suite and is hard-wired to send all traffic through the Proxy automatically.
+
+### 🧱 Why Use the Built-in Browser?
+
+* **Zero Configuration:** You don't need to change any settings in your OS or primary browser (like Brave or Safari).
+* **Pre-installed Certificates:** It already trusts Burp’s Certificate Authority (CA), meaning it can handle HTTPS traffic out of the box.
+* **Isolation:** It keeps your pentesting traffic separate from your personal browsing, preventing "noise" from other tabs or extensions from cluttering your Burp history.
+
+---
+
+## ⚙️ The "Sandbox" Issue on Linux
+
+If you are using **Kali Linux** (likely in your VM) or the **AttackBox** and running as the `root` user, the browser might fail to launch. This is a security feature of Chromium—it refuses to run a "Sandbox" (an isolated environment) when the user has full system administrative privileges.
+
+### 🛠️ How to Fix It:
+
+1. **The Recommended Way:** Run Burp as a standard, non-root user.
+2. **The Quick Way (for Labs):** * Go to **Settings > Tools > Burp's browser**.
+* Check the box: **"Allow Burp's browser to run without a sandbox"**.
+* *Warning:* Only do this in a lab environment. Running a browser without a sandbox means if you visit a malicious site that exploits the browser, it has direct access to your system.
+
+
+
+---
+
+## 🧠 Navigation Tip: Finding the Browser
+
+You can launch it by going to the **Proxy** tab and selecting the **Intercept** sub-tab. The big **Open Browser** button will be right there next to the Intercept toggle.
+
+---
+
+## 📝 Task 11 Answers
+
+* **Click me to proceed to the next task.**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Burp Browser vs. External Browser
+
+| Feature | Burp Browser | External (Firefox/Brave) |
+| --- | --- | --- |
+| **Setup Time** | Instant | Requires FoxyProxy + CA Cert |
+| **HTTPS Support** | Automatic | Manual Setup Required |
+| **Extensions** | Limited | Use your favorite tools |
+| **Stability** | Very High | High |
+
+---
