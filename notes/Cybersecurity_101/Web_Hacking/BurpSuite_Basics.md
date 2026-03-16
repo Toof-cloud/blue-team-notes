@@ -717,3 +717,75 @@ You can launch it by going to the **Proxy** tab and selecting the **Intercept** 
 | **Stability** | Very High | High |
 
 ---
+# Burp Suite: The Basics — Task 12
+
+## Scoping and Targeting
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The "Noise" Problem
+
+When you start a pentest, your browser is likely sending requests to dozens of domains—Google Analytics, browser telemetry, background extensions, and CDNs. If Burp intercepts everything, your **HTTP History** and **Intercept** tab will be flooded with "noise," making it impossible to find the actual vulnerabilities in your target.
+
+### 🧱 What is Scoping?
+
+**Scoping** is the process of telling Burp Suite exactly which domains or IP addresses you are legally allowed (or personally interested) to test.
+
+* **In-Scope:** Your target (e.g., `http://10.10.x.x/`).
+* **Out-of-Scope:** Everything else (e.g., `google.com`, `mozilla.net`).
+
+---
+
+## ⚙️ How to Set Your Scope
+
+There are two ways to define your target scope:
+
+1. **The Easy Way:** Go to the **Target > Site map** tab. Right-click the folder representing your target machine and select **Add to scope**.
+2. **The Manual Way:** Go to **Target > Scope settings**. Here you can use prefixes or even **Regex** (Regular Expressions) to include or exclude specific subdomains or folders.
+
+---
+
+## 🔍 The "Double Lock" Configuration
+
+Adding a target to your scope is only the first step. To truly clean up your workspace, you must tell Burp's modules to respect that scope.
+
+### 1. Cleaning the History
+
+When you add a target to the scope, Burp will ask: *"Do you want to stop logging out-of-scope items?"* * Selecting **Yes** prevents your **HTTP History** from filling up with junk.
+
+### 2. Silencing the Proxy (Crucial)
+
+By default, the **Proxy Intercept** will still stop *every* request, even if it's out of scope. To fix this:
+
+1. Go to **Settings > Tools > Proxy**.
+2. Find the **Intercept Client Requests** section.
+3. Add or enable the rule: `And | URL | Is in target scope`.
+
+---
+
+## 🧠 Security Perspective: Legal Safety
+
+In a professional environment, scoping isn't just for convenience—it's for **legal protection**. Attacking a server that is not listed in your "Rules of Engagement" (RoE) can have serious legal consequences. By strictly enforcing your scope within Burp, you ensure that you don't accidentally send a malicious payload to a third-party service integrated into the web app.
+
+---
+
+## 📝 Task 12 Answers
+
+* **Add http://MACHINE_IP/ to your scope... See the difference...**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Scoping Cheat Sheet
+
+| Goal | Action |
+| --- | --- |
+| **Hide background noise** | `Target > Site map > Filter bar > "Show only in-scope items"` |
+| **Ignore subdomains** | Use `Exclude from scope` for specific folders in the Site Map. |
+| **Reset Intercept** | If you accidentally "Forward" a request you didn't mean to, check the **HTTP History** to see what was sent. |
+
+---
