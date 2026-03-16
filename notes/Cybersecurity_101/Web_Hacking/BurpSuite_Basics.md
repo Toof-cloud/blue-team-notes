@@ -256,3 +256,59 @@ When you first open Burp, you will see a splash screen. For the Community Editio
 3. **Start Burp:** Click the button and wait for the Dashboard to load.
 
 ---
+# Burp Suite: The Basics — Task 5
+
+## The Dashboard
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Command Center
+
+When you first launch Burp Suite, the **Dashboard** serves as your home base. It provides a bird's-eye view of what the application is doing in the background and, in the Professional version, what vulnerabilities it has found.
+
+### 🧱 The Four Quadrants
+
+The dashboard is split into four distinct sections. Understanding these helps you monitor your session's health and progress.
+
+| Quadrant | Name | Purpose |
+| --- | --- | --- |
+| **Top Left** | **Tasks** | Displays background activities. Community users will mostly see the **"Live passive crawl,"** which silently maps out the site as you browse. |
+| **Bottom Left** | **Event Log** | The "system logs" of Burp. It tells you if the proxy started successfully or if there are connection errors. |
+| **Top Right** | **Issue Activity** | **(Pro Only)** Real-time feed of vulnerabilities found by the automated scanner. |
+| **Bottom Right** | **Advisory** | **(Pro Only)** Detailed "vulnerability encyclopedia" providing descriptions and fix advice for items in Issue Activity. |
+
+---
+
+## ⚙️ Key Dashboard Features
+
+* **The Help Icon (?):** Burp Suite has excellent built-in documentation. Every tab has a small question mark in the top corner; clicking it gives you a detailed explanation of every button in that specific view.
+* **Update Notifications:** At the very top or bottom of the dashboard, Burp will notify you if a new version is available.
+* **Health Monitoring:** If you see many red entries in the **Event Log**, it usually means your proxy or browser configuration is incorrect.
+
+---
+
+## 🧠 Why "Live Passive Crawl"?
+
+Even in the Community edition, Burp is always working. As you visit pages through the Burp Proxy, the **Live Passive Crawl** task identifies every script, image, and sub-page. This builds the **Site Map** (which we will cover in later tasks), allowing you to see the entire structure of the web app without having to click every single link manually.
+
+---
+
+## 📝 Task 5 Answers
+
+* **What menu provides information about the actions performed by Burp Suite, such as starting the proxy...?**
+* `Event log`
+
+
+
+---
+
+## 🛠️ Dashboard Troubleshooting
+
+If you are testing a site and nothing is showing up in Burp, check the **Event Log** for these common errors:
+
+* **"Proxy service failed to start on port 8080":** Another app (like another Burp instance) is already using that port.
+* **"The client failed to negotiate a TLS connection":** Usually means you haven't installed the Burp CA Certificate in your browser yet (covered in Task 13).
+
+---
