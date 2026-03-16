@@ -860,3 +860,74 @@ If you still see "Secure Connection Failed" after importing:
 * **HSTS Sites:** Some sites (like Google or Facebook) use **HSTS**, which is extra strict. If the certificate isn't perfect, they will block it entirely with no "Advanced > Proceed" option.
 
 ---
+# Burp Suite: The Basics — Task 14
+
+## Example Attack: Bypassing Client-Side Filters
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Vulnerability: Reflected XSS
+
+This task demonstrates a classic **Cross-Site Scripting (XSS)** attack. In this scenario, the web application takes input from the user and "reflects" it back onto the page. If the input isn't properly cleaned, an attacker can inject JavaScript that the browser will execute.
+
+### 🧱 Why Burp is Necessary
+
+Many websites use **Client-Side Filtering** (JavaScript running in your browser) to validate inputs. For example, an email field might block the `<` or `>` characters.
+
+* **The Weakness:** Client-side filters can be seen and bypassed by the user.
+* **The Solution:** We send "clean" data to the browser's filter, catch the request in **Burp Proxy**, and swap it for our "malicious" payload before it ever reaches the server.
+
+---
+
+## ⚙️ The Attack Workflow
+
+1. **Preparation:** Turn **Intercept ON** in Burp.
+2. **The "Lies":** Enter a valid email (e.g., `test@example.com`) to satisfy the browser's filter.
+3. **The Interception:** Click submit. Burp catches the request.
+4. **The Swap:** Replace the email address with your payload: `<script>alert("Succ3ssful XSS")</script>`.
+5. **The Encoding:** Highlight the payload and press **`Ctrl + U`**. This converts characters like `<` into `%3c` so the web server doesn't get confused by the raw HTML.
+6. **The Execution:** Click **Forward**.
+
+---
+
+## 🧠 Security Perspective: Defense in Depth
+
+This attack proves a fundamental rule of web security: **Never trust the client.** * A developer must implement **Server-Side Validation**.
+
+* Even if the browser's JavaScript says the data is "safe," the server must re-check the data before displaying it or storing it in a database.
+
+---
+
+## 📝 Task 14 Answers
+
+* **Click me to proceed to the next task.**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Burp Suite Basics Final Cheat Sheet
+
+### ⌨️ Essential Hotkeys
+
+| Action | Shortcut |
+| --- | --- |
+| **Forward Request** | `Ctrl + F` |
+| **Send to Repeater** | `Ctrl + R` |
+| **Send to Intruder** | `Ctrl + I` |
+| **URL Encode** | `Ctrl + U` |
+| **URL Decode** | `Ctrl + Shift + U` |
+
+### 📂 Module Quick-Reference
+
+* **Proxy:** Intercept and modify traffic "live."
+* **Target:** View the site map and define what you are allowed to attack.
+* **Repeater:** Manually resend a single request over and over with different payloads.
+* **Intruder:** Brute-force logins or fuzz parameters using wordlists.
+* **Decoder:** Quickly convert Base64, Hex, or URL encoding.
+* **Settings:** Change your theme (Darcula), hotkeys, and CA certificates.
+
+---
