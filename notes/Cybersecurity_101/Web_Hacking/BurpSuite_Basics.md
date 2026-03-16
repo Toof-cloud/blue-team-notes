@@ -312,3 +312,64 @@ If you are testing a site and nothing is showing up in Burp, check the **Event L
 * **"The client failed to negotiate a TLS connection":** Usually means you haven't installed the Burp CA Certificate in your browser yet (covered in Task 13).
 
 ---
+# Burp Suite: The Basics — Task 6
+
+## Navigation
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Master the Interface
+
+Burp Suite's interface is designed for speed and organization. Because you will often be jumping between "capturing" a request and "modifying" it, understanding the tab hierarchy and shortcuts is essential for a smooth workflow.
+
+### 🧱 The Tab Hierarchy
+
+Burp uses a two-tier menu system to keep its many tools organized:
+
+1. **Main Modules (Top Row):** These are the major tools like **Proxy**, **Target**, **Intruder**, and **Repeater**.
+2. **Sub-Tabs (Second Row):** Once you select a module, the second row changes to show specific functions. For example, selecting **Proxy** will show sub-tabs like **Intercept**, **HTTP history**, and **WebSockets history**.
+
+---
+
+## ⚙️ Detaching for Productivity
+
+If you are working on a large monitor (like your **Mac** setup), you might find it helpful to see two tools at once.
+
+* **The Detach Feature:** Found under the **Window** menu, this allows you to pull a tab (like **Repeater**) into its own separate window. This is perfect for side-by-side comparison of different requests.
+
+---
+
+## ⌨️ Speed Run: Keyboard Shortcuts
+
+In the middle of a pentest, clicking through menus wastes time. Professional researchers use shortcuts to jump between the most important modules.
+
+| Shortcut | Destination Tab |
+| --- | --- |
+| `Ctrl + Shift + D` | **Dashboard** |
+| `Ctrl + Shift + T` | **Target** |
+| `Ctrl + Shift + P` | **Proxy** |
+| `Ctrl + Shift + I` | **Intruder** |
+| `Ctrl + Shift + R` | **Repeater** |
+
+> **Pro Tip:** You can also send a request from the **Proxy** directly to **Repeater** by pressing `Ctrl + R` while the request is selected!
+
+---
+
+## 📝 Task 6 Answers
+
+* **Which tab Ctrl + Shift + P will switch us to?**
+* `Proxy tab`
+
+
+
+---
+
+## 🛠️ Interface Navigation Cheat Sheet
+
+* **The "Home" Key:** Always look at the top left module; it's usually where the core action is happening.
+* **Filter Bar:** Many sub-tabs (like HTTP History) have a filter bar just below the sub-tabs. Clicking this allows you to hide "noise" (like images or CSS) so you only see the actual web requests.
+* **The Intercept Button:** In the **Proxy > Intercept** tab, this is the most clicked button in Burp. It toggles whether traffic is paused or allowed to flow through.
+
+---
