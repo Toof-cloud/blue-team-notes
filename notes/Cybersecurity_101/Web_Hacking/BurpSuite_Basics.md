@@ -594,3 +594,66 @@ Once a request is caught in the Proxy, right-clicking it opens a world of possib
 * **Change Request Method:** Instantly swap a `GET` request to a `POST` request.
 
 ---
+# Burp Suite: The Basics — Task 10
+
+## Site Map and Issue Definitions
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Mapping the Attack Surface
+
+The **Target** tab is where Burp Suite organizes everything it knows about the web applications you are testing. While the Proxy shows you a "live stream" of traffic, the Target tab acts as the "librarian," filing every request into a logical structure.
+
+### 🧱 The Three Sub-Tabs
+
+| Sub-Tab | Purpose | Key Benefit |
+| --- | --- | --- |
+| **Site Map** | A hierarchical tree view of the target. | Automatically organizes folders and files (e.g., `/assets`, `/api`, `/admin`) as you browse. |
+| **Issue Definitions** | A built-in vulnerability encyclopedia. | Provides a massive list of web flaws (like XSS, SQLi) with descriptions and remediation advice. |
+| **Scope Settings** | Defines the "In-Scope" targets. | Tells Burp to ignore traffic from unrelated sites (like your background Spotify or Google tabs). |
+
+---
+
+## ⚙️ Enumeration via Browsing
+
+Even without the Professional automated scanner, you can perform **Passive Crawling**.
+
+* As you click through the target website on your **Mac** or **Kali** browser, Burp watches every request.
+* It populates the Site Map with scripts (`.js`), stylesheets (`.css`), and hidden endpoints that you might not see on the page but are loaded in the background.
+* **Pro Tip:** Look for grayed-out items in the Site Map. These are URLs that Burp has *inferred* exist (from links found in other pages) but you haven't actually visited yet.
+
+---
+
+## 🔍 Issue Definitions: The Pentester’s Cheat Sheet
+
+While the Community Edition doesn't automatically find bugs, the **Issue Definitions** tab is an invaluable learning resource.
+
+* If you suspect a site is vulnerable to **"Cross-Origin Resource Sharing (CORS) Misconfiguration,"** you can search for it here.
+* Burp will provide a detailed breakdown of the risk and how a developer should fix it. This is excellent for writing professional reports.
+
+---
+
+## 🧠 Security Perspective: Finding the "Hidden"
+
+Attackers love the Site Map because it often reveals **API endpoints** and **development artifacts**. For example, a website might fetch data from `/api/v1/user/details`. Even if that URL isn't in your browser's address bar, Burp will catch it, allowing you to right-click it and send it to **Repeater** for further testing.
+
+---
+
+## 📝 Task 10 Answers
+
+* **What is the flag you receive after visiting the unusual endpoint?**
+* `THM{NmNlZDI4NjdiZGMzZGUzOTI2YmIyN2Vj}`
+* *(Method: Browse the site thoroughly. Look at your Site Map for an endpoint that doesn't look like a standard page, such as `/secret-flag-path` or a similar hidden directory.)*
+
+
+
+---
+
+## 🛠️ Site Map Navigation Tips
+
+* **Right-Click > Show only in-scope items:** Cleans up the "noise" so you only see your target.
+* **Right-Click > Engagement Tools (Pro Only):** Allows for automated discovery, but in Community, you'll be doing this manually by clicking every link you find.
+
+---
