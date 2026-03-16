@@ -449,3 +449,75 @@ Burp maintains a **"Cookie Jar"** in the background. As you browse, it stores th
 | **Proxy Port** | If port 8080 is blocked, search for **Proxy Listener** to change it to 8081 or 8888. |
 
 ---
+# Burp Suite: The Basics — Task 8
+
+## Introduction to the Burp Proxy
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 The Heart of the Suite
+
+The Burp **Proxy** is the most vital component of your testing workflow. It sits between your browser and the web server, acting as a gateway that allows you to see, stop, and change data as it travels across the wire.
+
+### 🧱 The Interception Cycle
+
+When the **Intercept** feature is enabled, Burp Suite "freezes" the request. This gives you time to look at the raw data before the server ever receives it.
+
+* **Forward:** Sends the request (and any changes you made) to the server.
+* **Drop:** Deletes the request. The server will never know you tried to send it, and the browser will show a loading error.
+* **Intercept is on/off:** Toggles whether you want to stop every single request or just let them flow through while logging them in the background.
+
+---
+
+## ⚙️ History vs. Intercept
+
+Even when "Intercept is off," Burp is still working as a proxy.
+
+1. **Intercept Tab:** For real-time "live" modification of a single request.
+2. **HTTP History Tab:** A chronological log of every request and response that has passed through the proxy.
+* **Pro Tip:** This is incredibly useful for finding "background" requests like API calls or JavaScript files that you might have missed while browsing.
+
+
+
+---
+
+## 🔍 Advanced Proxy Features
+
+The Proxy isn't just a simple "pause" button; it has powerful automation settings:
+
+* **Response Interception:** By default, Burp only stops outgoing requests. You can change the settings to also stop **responses** from the server, allowing you to modify the HTML or JavaScript before your browser renders it.
+* **Match and Replace:** You can set rules to automatically change data.
+* *Example:* Automatically change your `User-Agent` to look like an iPhone, even if you are on your **Mac**.
+* *Example:* Automatically replace "Admin: False" with "Admin: True" in every cookie that passes through.
+
+
+
+---
+
+## 🧠 Security Perspective: WebSocket Interception
+
+Modern "live" web apps often use **WebSockets** for real-time communication (like chat apps or stock tickers). Unlike standard HTTP, WebSockets keep a persistent connection open. Burp Proxy captures these too in the **WebSockets history** tab, allowing you to intercept binary or text data that usually bypasses standard logging.
+
+---
+
+## 📝 Task 8 Answers
+
+* **Click me to proceed to the next task.**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Proxy Quick-Reference
+
+| Action | Shortcut (while in Intercept) |
+| --- | --- |
+| **Forward Request** | `Ctrl + F` |
+| **Send to Repeater** | `Ctrl + R` |
+| **Send to Intruder** | `Ctrl + I` |
+| **Toggle Intercept** | Click the "Intercept is on/off" button |
+
+---
