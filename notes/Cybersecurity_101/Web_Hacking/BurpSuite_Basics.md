@@ -521,3 +521,76 @@ Modern "live" web apps often use **WebSockets** for real-time communication (lik
 | **Toggle Intercept** | Click the "Intercept is on/off" button |
 
 ---
+# Burp Suite: The Basics — Task 9
+
+## Connecting through the Proxy (FoxyProxy)
+
+**TryHackMe Room Notes**
+
+---
+
+## 📌 Why Use FoxyProxy?
+
+By default, your browser sends traffic directly to the internet. To use Burp, we must tell the browser: *"Stop! Send everything to `127.0.0.1:8080` (Burp) first."* While you can change this in your browser's deep settings, **FoxyProxy** is the industry-standard browser extension that allows you to toggle this connection on and off with a single click.
+
+### 🧱 Configuration Details
+
+To link your browser to Burp Suite, use the following standard parameters:
+
+* **Proxy IP:** `127.0.0.1` (This refers to "localhost" or your own machine).
+* **Port:** `8080` (The default port where Burp's Proxy listener "sits" and waits for data).
+* **Type:** HTTP
+
+---
+
+## ⚙️ The Interception Workflow
+
+Once FoxyProxy is active and pointing to Burp, your browsing experience changes:
+
+1. **Activate FoxyProxy:** Select your "Burp" profile in the browser.
+2. **Enable Intercept:** In Burp Suite, go to **Proxy > Intercept** and ensure the button says **"Intercept is on"**.
+3. **The "Hang":** When you navigate to a site (like `http://MACHINE_IP`), the browser will look like it's loading forever. **This is normal.** It means Burp has successfully caught the request and is waiting for your command.
+4. **Forward/Drop:** You now decide the fate of that request in the Burp window.
+
+---
+
+## 🔍 Troubleshooting the Connection
+
+If you enable FoxyProxy and see an "Unable to connect" error in your browser, check these three things:
+
+* **Is Burp running?** The proxy won't work if the "receiver" (Burp) isn't open.
+* **Is the Port correct?** Check **Settings > Network > Proxy** in Burp to ensure the listener is actually on `8080`.
+* **Is Intercept off?** If the browser is hanging but you don't see anything in the Intercept tab, you might have another request already waiting for a "Forward" or "Drop" click.
+
+---
+
+## 🧠 Security Perspective: Noise Reduction
+
+Browsers are noisy! Even if you only want to look at one website, your browser is constantly sending requests to:
+
+* Google (for search suggestions).
+* Browser developers (for telemetry/updates).
+* Various extensions.
+
+**Pro Tip:** Before you turn on "Intercept," close all other browser tabs. This prevents Burp from being flooded with "junk" requests that have nothing to do with your target.
+
+---
+
+## 📝 Task 9 Answers
+
+* **Click me to proceed to the next task.**
+* `No answer needed`
+
+
+
+---
+
+## 🛠️ Right-Click Power Actions
+
+Once a request is caught in the Proxy, right-clicking it opens a world of possibilities:
+
+* **Send to Repeater (`Ctrl + R`):** Perfect for when you want to try different inputs on that specific page.
+* **Send to Intruder (`Ctrl + I`):** For when you want to automate a brute-force attack.
+* **Change Request Method:** Instantly swap a `GET` request to a `POST` request.
+
+---
